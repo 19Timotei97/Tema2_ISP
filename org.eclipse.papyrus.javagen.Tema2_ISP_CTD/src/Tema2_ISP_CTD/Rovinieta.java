@@ -25,6 +25,42 @@ public class Rovinieta {
 	/**
 	 * 
 	 */
-	public void afisareDate() {
+	public void setNrInmat(String nrInmatriculare)
+	{
+		this.nrInmatriculare = nrInmatriculare;
+	}
+	
+	public void setSerieSasiu(String serieSasiu)
+	{
+		this.serieSasiu = serieSasiu;
+		
+	}
+	
+	public void setId(long id)
+	{
+		this.idRovinieta = id;
+	}
+	
+	
+	public void afisareDate() 
+	{
+		System.out.println("Rovinieta " + this.idRovinieta);
+		System.out.println("Numar inmatriculare: " + this.nrInmatriculare);
+		System.out.println("Serie sasiu: " + this.serieSasiu);
+	}
+	
+	public String getNrInmat()
+	{
+		return this.nrInmatriculare;
+	}
+	
+	public String getSerieSasiu()
+	{
+		return this.serieSasiu;
+	}
+	
+	public long getId()
+	{
+		return this.idRovinieta;
 	}
 };
