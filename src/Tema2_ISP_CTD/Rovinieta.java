@@ -9,14 +9,34 @@ package Tema2_ISP_CTD;
  * 
  */
 public class Rovinieta {
-	/**
-	 * 
-	 */
+	
+	private long idRovinieta;
+
+	private boolean isExpired;
+
 	private String nrInmatriculare;
-	/**
-	 * 
-	 */
+	
 	private String serieSasiu;
+	
+	public Rovinieta()
+	{
+		idRovinieta = 0000l;
+		isExpired = false;
+		nrInmatriculare = "";
+		serieSasiu = "";
+	}
+	
+	public Rovinieta(String nrInmat, String serieSasiu, long idRovinieta)
+	{
+		nrInmatriculare = nrInmat;
+		this.serieSasiu = serieSasiu;
+		this.idRovinieta = idRovinieta;
+	}
+	
+	public Rovinieta(Rovinieta rov)
+	{
+		this(rov.nrInmatriculare, rov.serieSasiu, rov.idRovinieta);
+	}
 	
 	public String getNrInmatriculare() {
 		return nrInmatriculare;
@@ -37,17 +57,16 @@ public class Rovinieta {
 	public void setSerieSasiu(String serieSasiu) {
 		this.serieSasiu = serieSasiu;
 	}
-
-	/**
-	 * 
-	 */
-	private long idRovinieta;
-
-	private boolean isExpired;
 	
-	/**
-	 * 
-	 */
+	//Adaosuri!!!!!!!!!!!!
+	public boolean getIsExpired() {
+		return isExpired;
+	}
+
+	public String getSerieSasiu() {
+		return this.serieSasiu;
+	}
+
 	public void afisareDate() 
 	{
 		System.out.println("Rovinieta ID: " + this.idRovinieta);
@@ -58,14 +77,5 @@ public class Rovinieta {
 			System.out.println("Da");
 		else System.out.println("Nu");
 	}
-	
-	//Adaosuri!!!!!!!!!!!!
-	public boolean getIsExpired() {
-		return isExpired;
-	}
 
-	public String getSerieSasiu() {
-		return this.serieSasiu;
-	}
-	
 };
