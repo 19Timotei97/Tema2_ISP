@@ -4,13 +4,18 @@
 
 package Tema2_ISP_CTD;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /************************************************************/
 /**
  **
  */
 public class Rovinieta {
 	
-	private long idRovinieta;
+	private static long idRovinieta = 159001l;
 
 	private boolean isExpired;
 
@@ -18,12 +23,14 @@ public class Rovinieta {
 	
 	private String serieSasiu;
 	
+	private Date data;
+	
 	/**
 	 * Constructor cu parametrii default
 	 */
 	public Rovinieta()
 	{
-		idRovinieta = 0000l;
+		idRovinieta += 1;
 		isExpired = false;
 		nrInmatriculare = "";
 		serieSasiu = "";
@@ -32,11 +39,17 @@ public class Rovinieta {
 	/**
 	 * Constructori cu parametri introdusi de la tastatura sau direct
 	 */
-	public Rovinieta(String nrInmat, String serieSasiu, long idRovinieta)
+	public Rovinieta(String nrInmat, String serieSasiu)
 	{
 		nrInmatriculare = nrInmat;
 		this.serieSasiu = serieSasiu;
-		this.idRovinieta = idRovinieta;
+	}
+	
+	public Rovinieta(String nrInmat, String serieSasius, long idRov)
+	{
+		this.setNrInmatriculare(nrInmat);
+		this.setSerieSasiu(serieSasius);
+		this.setIdRovinieta(idRov);
 	}
 	
 	/**
@@ -52,6 +65,16 @@ public class Rovinieta {
 	 */
 	public String getNrInmatriculare() {
 		return nrInmatriculare;
+	}
+	
+	public Date getData() 
+	{
+		return this.data;
+	}
+	
+	public void setData(Date data)
+	{
+		this.data = data;
 	}
 
 	public void setNrInmatriculare(String nrInmatriculare) {

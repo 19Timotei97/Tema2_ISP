@@ -4,6 +4,11 @@
 
 package Tema2_ISP_CTD;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /************************************************************/
 /**
  * 
@@ -118,15 +123,34 @@ public class Proprietar_masina extends Date_Rovinieta {
 	 */
 	public boolean verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) 
 	{
-		if(evidenta.rovinietaExista(serieSasiu))
+		Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
+		Date date;
+		try {
+			date = new Date();
+			temp.setData(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		if(Calendar.getInstance().get(Calendar.YEAR) == temp.getData().getYear()) {
+			if(((Calendar.getInstance().get(Calendar.MAY)) + 1) - (temp.getData().getMonth() + 1) < 6)
+				temp.setIsExpired(false);
+		}
+		else temp.setIsExpired(false);
+		if(evidenta.rovinietaExista(serieSasiu)) {
 			if(!evidenta.rovinietaExpirata(serieSasiu))
 			{
 				System.out.println("Rovinieta exista si nu a expirat!");
 				return true;
 			}
-		// Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu, 99);
+		}
 		
-		System.out.println("Rovinieta expirata! Un echipaj de politie apropiat va fi alertat!");
+		else 
+		{
+			System.out.println("Rovinieta expirata! Un echipaj de politie apropiat va fi alertat!");
+			return false;
+		}
 		return false;
 	}
 };

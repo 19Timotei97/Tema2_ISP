@@ -160,4 +160,11 @@ public class Evidenta {
 		}
 		return "";
 	}
+
+	public Rovinieta getRovinieta(int i) 
+	{
+		if(rovinieta != null && i > 0 && i < rovinieta.length)
+			return rovinieta[i];
+		return null;
+	}
 };
