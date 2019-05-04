@@ -69,6 +69,7 @@ public class Organ_politie extends Date_Rovinieta {
 		 * 
 		 * !Vezi  ca obiectul meu "sanctiune" sa l apeleze ok.
 		 * 
+		 * fmm de egit
 		 */
 		return new Sanctiune(proba, data, loc, this);
 		
