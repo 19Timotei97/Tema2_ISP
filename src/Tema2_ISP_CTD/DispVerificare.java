@@ -20,6 +20,19 @@ public class DispVerificare extends Date_Rovinieta {
 	
 	
 	
+	public DispVerificare() {
+		nrRoviniete =0;
+		rovinieta =null;
+	}
+	
+	public DispVerificare(Rovinieta[] roviniete, int lungime) {
+		nrRoviniete = lungime;
+		if(roviniete != null) {
+			for(int i=0; i<nrRoviniete; ++i)
+				rovinieta[i] = roviniete[i];
+		}
+	}
+	
 	public Rovinieta getRovinieta(int i) 
 	{
 		return rovinieta[i];
@@ -46,10 +59,36 @@ public class DispVerificare extends Date_Rovinieta {
 	
 	public void adaugaRovinieta(Rovinieta rovinieta) 
 	{
-		nrRoviniete = nrRoviniete + 1;
-		this.rovinieta = new Rovinieta[nrRoviniete];
 		
-		this.rovinieta[nrRoviniete - 1] = rovinieta;
+		if(nrRoviniete > 1) {
+			//nrRov =2
+			nrRoviniete = nrRoviniete +1; //nrRov = 3
+			Rovinieta temp[] = new Rovinieta[nrRoviniete]; 
+			
+			for(int i=0; i<nrRoviniete-1; ++i)
+				temp[i] = this.rovinieta[i];
+			
+			temp[nrRoviniete-1] = rovinieta;
+			
+			this.rovinieta = new Rovinieta[nrRoviniete];
+			
+			for(int i=0; i<nrRoviniete; ++i)
+				this.rovinieta[i] = temp[i];
+		} 
+		else if(nrRoviniete == 1)
+		{
+			nrRoviniete = nrRoviniete +1;
+			Rovinieta temp = this.rovinieta[nrRoviniete-2];
+			
+			this.rovinieta = new Rovinieta[nrRoviniete]; //marit spatiul la 2
+			this.rovinieta[nrRoviniete -2] = temp;       // pe 0 punem temp
+			this.rovinieta[nrRoviniete -1] = rovinieta;  // pe 1 punem rovinieta pe care o vrem
+		} 
+		else {
+			nrRoviniete = nrRoviniete +1;
+			this.rovinieta = new Rovinieta[nrRoviniete]; //aloc 1 spatiu
+			this.rovinieta[nrRoviniete-1] = rovinieta;   // pun pe pozitia 1-1=0 pe rovinieta
+		}
 		
 	}
 	
@@ -116,8 +155,7 @@ public class DispVerificare extends Date_Rovinieta {
 				return true;
 		
 		Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu, 99);
-		rovinieta[nrRoviniete] = temp;
-		nrRoviniete = nrRoviniete +1;
+		this.adaugaRovinieta(temp);
 		
 		System.out.println("Rovinieta expirata! Inceperea procesului de alertare politie!");
 		alertarePolitie(temp);

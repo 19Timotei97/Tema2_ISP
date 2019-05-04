@@ -24,14 +24,8 @@ public class Proprietar_masina extends Date_Rovinieta {
 	/**
 	 * 
 	 */
+	private Rovinieta rovinieta=null;
 	
-	
-	public void introducereDate(String nume, String CNP, String adresa)
-	{
-		this.nume = nume;
-		this.cnp = CNP;
-		this.adresa = adresa;
-	}
 	
 	public String getNume() {
 		return nume;
@@ -58,26 +52,28 @@ public class Proprietar_masina extends Date_Rovinieta {
 	}
 
 	public Rovinieta getRovinieta() {
-		return rovinieta;
+		if(rovinieta != null) return rovinieta;
+		return null;
 	}
 
 	public void setRovinieta(Rovinieta rovinieta) {
 		this.rovinieta = rovinieta;
 	}
 
-	private Rovinieta rovinieta;
-
 	/**
 	 * 
 	 */
-	public Proprietar_masina(int optiune,String nume, String cnp, String adresa, Rovinieta rovinieta) {
-		super();
-		if(optiune == 1) {
-			this.nume = nume;
-			this.cnp = cnp;
-			this.adresa = adresa;
-			this.rovinieta = rovinieta;
-		}
+	public Proprietar_masina(String nume, String cnp, String adresa) {
+		this.nume = nume;
+		this.cnp = cnp;
+		this.adresa = adresa;
+	}
+	
+	public Proprietar_masina(String nume, String cnp, String adresa, Rovinieta rovinieta) {
+		this.nume = nume;
+		this.cnp = cnp;
+		this.adresa = adresa;
+		this.rovinieta = rovinieta;
 	}
 	
 	void afisare() {
@@ -85,18 +81,27 @@ public class Proprietar_masina extends Date_Rovinieta {
 		System.out.println("Nume: " + nume);
 		System.out.println("CNP: " + cnp);
 		System.out.println("Adresa: " + adresa);
-		System.out.println("Rovinieta: ");
-		this.rovinieta.afisareDate();
+		if(rovinieta != null) {
+			System.out.println("Rovinieta: ");
+			this.rovinieta.afisareDate();
+		}
 	}
 	
-	public boolean introducereDate(String serieSasiu, String nrInmatriculare, Evidenta evidenta) {
-		if(!evidenta.rovinietaExista(serieSasiu)) {
-			Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu, 99);
-			evidenta.adaugaRovinieta(temp);
-			
-			this.rovinieta = temp;
+	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta) {
+		if(rovinieta == null) {
+			if(evidenta.rovinietaExista(serieSasiu) == false) {
+				Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu, 99);
+				evidenta.adaugaRovinieta(temp);
+				
+				this.rovinieta = temp;
+			}
+		} else if( this.rovinieta.getSerieSasiu().equals(serieSasiu) == true && evidenta.rovinietaExpirata(serieSasiu) == false) return true;
+		else if(this.rovinieta.getSerieSasiu().equals(serieSasiu) == true) this.rovinieta.setIsExpired(false);
+		else {
+			this.rovinieta.setNrInmatriculare(nrInmatriculare);
+			this.rovinieta.setSerieSasiu(serieSasiu);
+			this.rovinieta.setIsExpired(false);
 		}
-		else if(!evidenta.rovinietaExpirata(serieSasiu)) return true;
 		return false;
 	}
 };

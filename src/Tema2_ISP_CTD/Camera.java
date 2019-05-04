@@ -83,8 +83,8 @@ public class Camera {
 	/**
 	 * 
 	 */
-	public void capturareImagine() {
+	public void capturareImagine(Imagine imag) {
 		StareCam = StariCamera.ImagineCapturata;
-		this.img = img;
+		this.img = imag;
 	}
 };

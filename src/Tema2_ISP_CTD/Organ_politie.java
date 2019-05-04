@@ -53,8 +53,9 @@ public class Organ_politie extends Date_Rovinieta {
 	public boolean verificareRovinieta(String nrInmat, String serieSasiu, Evidenta evidenta) {
 		if(dispverif.verificareRovinieta(nrInmat, serieSasiu, evidenta) == false) 
 		{
-			 aplicareSanctiune();
-			 return false;
+			System.out.println("Sunt in verifRov!");
+			Sanctiune s1=aplicareSanctiune();
+			return false;
 		}
 		return true;
 	}
@@ -63,6 +64,8 @@ public class Organ_politie extends Date_Rovinieta {
 	 */
 	
 	public Sanctiune aplicareSanctiune() {
+		
+		System.out.println("Sunt in aplicareSanctiune!");
 		
 		String proba = "Rovinieta expirata";
 		
