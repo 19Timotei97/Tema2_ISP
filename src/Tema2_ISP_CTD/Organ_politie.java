@@ -6,7 +6,7 @@ package Tema2_ISP_CTD;
 
 /************************************************************/
 /**
- * CEva orice nimic
+ * CEva orice nimic oriceseafosjioghiorsh;gia
  */
 public class Organ_politie extends Date_Rovinieta {
 	/**
