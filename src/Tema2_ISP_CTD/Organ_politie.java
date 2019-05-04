@@ -23,7 +23,7 @@ public class Organ_politie extends Date_Rovinieta {
 	public Organ_politie(String nume, DispVerificare dispV)
 	{
 		this.nume = nume;
-		
+		dispverif = dispV;
 	}
 	/**
 	 * 

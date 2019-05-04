@@ -20,17 +20,25 @@ public class DispVerificare extends Date_Rovinieta {
 	
 	/**
 	 * 
-	 */	public void afiseazaRoviniete() {
+	 */	public void afiseazaRoviniete() 
+	 	{
+		 	if(nrRoviniete == 0)
+		 		return;
+		 
 			for(int i=0; i<nrRoviniete; ++i)
 				System.out.println(rovinieta[i] + " ");
 		}
 		
-		public Rovinieta[] getRovinieta() {
-			return this.rovinieta;
+		public Rovinieta getRovinieta(int i) 
+		{
+			return rovinieta[i];
 		}
 
-		public void setRovinieta(Rovinieta[] rovinieta, int lungime) {
-			for(int i=0; i<lungime; ++i) {
+		public void setRovinieta(Rovinieta[] rovinieta, int lungime) 
+		{
+			rovinieta = new Rovinieta[lungime];
+			
+			for(int i=0; i < lungime; ++i) {
 				this.rovinieta[nrRoviniete] = rovinieta[i];
 				nrRoviniete = nrRoviniete +1;
 			}
@@ -40,9 +48,13 @@ public class DispVerificare extends Date_Rovinieta {
 			return nrRoviniete;
 		}
 		
-		public void adaugaRovinieta(Rovinieta rovinieta) {
-			this.rovinieta[nrRoviniete] = rovinieta;
-			nrRoviniete = nrRoviniete +1;
+		public void adaugaRovinieta(Rovinieta rovinieta) 
+		{
+			nrRoviniete = nrRoviniete + 1;
+			this.rovinieta = new Rovinieta[nrRoviniete];
+			
+			this.rovinieta[nrRoviniete - 1] = rovinieta;
+			
 		}
 		
 		public boolean scoateRovinieta(Rovinieta rovinieta) {
