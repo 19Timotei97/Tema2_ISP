@@ -11,7 +11,7 @@ package Tema2_ISP_CTD;
 public class Date_Rovinieta {
 	/**
 	 * 
-	 * @param ID 
+	 * Metoda de baza folosita pentru a verifica rovinieta, putand fi supradefinita in celelalte clase ce deriva din aceasta
 	 */
 	public boolean verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) {
 		return true;

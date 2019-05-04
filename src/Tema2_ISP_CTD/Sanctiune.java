@@ -9,31 +9,20 @@ package Tema2_ISP_CTD;
  * 
  */
 public class Sanctiune {
-	/**
-	 * 
-	 */
+
 	private String proba;
-	/**
-	 * 
-	 */
+
 	private String data;
-	/**
-	 * 
-	 */
-	private String ora;
-	/**
-	 * 
-	 */
+	
 	private String loc;
-	/**
-	 * 
-	 */
+
 	private Organ_politie organPolitie;
-	/**
-	 * 
-	 */
+
 	private Proprietar_masina proprietar;
 	
+	/*
+	 * Constructor ce primeste parametrii necesari crearii unei sanctiuni
+	 */
 	public Sanctiune(String proba, String data, String loc)
 	{
 		this.proba = proba;
@@ -41,6 +30,10 @@ public class Sanctiune {
 		this.loc = loc;
 	}
 	
+	/*
+	 * 	Constructor ce primeste pe langa datele de creare a unei sanctiuni, si un organ de politie
+	 * catre care va fi asignata.
+	 */
 	public Sanctiune(String proba, String data, String loc, Organ_politie organPolitie)
 	{
 		this.proba = proba;
@@ -49,7 +42,9 @@ public class Sanctiune {
 		this.organPolitie = organPolitie;
 	}
 	
-	
+	/*
+	 * Getteri, respectiv setteri pentru fiecare atribut al clasei
+	 */
 	public void setProba(String proba)
 	{
 		this.proba = proba;
@@ -70,15 +65,6 @@ public class Sanctiune {
 		return this.data;
 	}
 	
-	public void setOra(String ora)
-	{
-		this.ora = ora;
-	}
-	
-	public String getOra()
-	{
-		return this.ora;
-	}
 	
 	public void setLoc(String loc)
 	{

@@ -18,6 +18,9 @@ public class Rovinieta {
 	
 	private String serieSasiu;
 	
+	/**
+	 * Constructor cu parametrii default
+	 */
 	public Rovinieta()
 	{
 		idRovinieta = 0000l;
@@ -26,6 +29,9 @@ public class Rovinieta {
 		serieSasiu = "";
 	}
 	
+	/**
+	 * Constructori cu parametri introdusi de la tastatura sau direct
+	 */
 	public Rovinieta(String nrInmat, String serieSasiu, long idRovinieta)
 	{
 		nrInmatriculare = nrInmat;
@@ -33,11 +39,17 @@ public class Rovinieta {
 		this.idRovinieta = idRovinieta;
 	}
 	
+	/**
+	 *	Constructor de copiere 
+	 */
 	public Rovinieta(Rovinieta rov)
 	{
 		this(rov.nrInmatriculare, rov.serieSasiu, rov.idRovinieta);
 	}
 	
+	/**
+	 * Setteri si getteri pentru fiecare atribut in parte
+	 */
 	public String getNrInmatriculare() {
 		return nrInmatriculare;
 	}
@@ -69,7 +81,10 @@ public class Rovinieta {
 	public void setSerieSasiu(String serieSasiu) {
 		this.serieSasiu = serieSasiu;
 	}
-
+	
+	/**
+	 * Metoda folosita pentru a returna datele din rovinieta si specificarea starii acesteia(expirata sau nu)
+	 */
 	public void afisareDate() 
 	{
 		System.out.println("Rovinieta ID: " + this.idRovinieta);

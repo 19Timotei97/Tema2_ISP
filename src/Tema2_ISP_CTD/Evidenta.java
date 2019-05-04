@@ -10,21 +10,25 @@ package Tema2_ISP_CTD;
  */
 public class Evidenta {
 	/**
-	 * 
+	 * Vectorul de roviniete in care se vor adauga, cauta sau scoate roviniete verificare sau noi
 	 */
 	private Rovinieta[] rovinieta;
 	/**
-	 * 
+	 * Intrucat se doreste ca numarul de roviniete sa fie acelasi pentru fiecare instanta a clasei Evidenta,
+	 * am hotarat sa il declaram static.
 	 */
 	private static int nrRovinieta =0;
 
 	/**
-	 * 
+	 * Constructor de baza
 	 */
 	public Evidenta(){
 		this.rovinieta = null;
 	}
 	
+	/**
+	 * Getteri si setteri pentru fiecare atribut in parte
+	 */
 	public Rovinieta[] getRovinieta() {
 		return this.rovinieta;
 	}
@@ -32,7 +36,7 @@ public class Evidenta {
 	public void setRovinieta(Rovinieta[] rovinieta, int lungime) {
 		this.rovinieta = new Rovinieta[lungime];
 		for(int i=0; i<lungime; ++i) {
-			this.rovinieta[nrRovinieta] = rovinieta[i];
+			this.rovinieta[i] = rovinieta[i];
 			nrRovinieta = nrRovinieta +1;
 		}
 	}
@@ -47,6 +51,10 @@ public class Evidenta {
 			rovinieta[i].afisareDate();
 	}
 	
+	/**
+	 * 
+	 * 
+	 */
 	public void adaugaRovinieta(Rovinieta rovinieta) {
 		
 		if(nrRovinieta > 1) {
@@ -81,6 +89,9 @@ public class Evidenta {
 		
 	}
 	
+	/**
+	 * Metoda ce va fi folosita daca se doreste scoaterea din Evidenta a unei roviniete 
+	 */
 	public boolean scoateRovinieta(Rovinieta rovinieta) {
 		boolean ok=false;
 		for(int i=0; i<nrRovinieta; ++i) {
@@ -97,6 +108,9 @@ public class Evidenta {
 		else return false;
 	}
 	
+	/**
+	 * Metoda ce va fi folosita pentru a scoate o rovinieta de pe o anumita pozitie
+	 */
 	public boolean scoateRovinieta(int numar) {
 		if(numar < nrRovinieta) {
 			for(int i=numar+1; i<nrRovinieta; ++i) {
@@ -107,6 +121,12 @@ public class Evidenta {
 		else return false;
 	}
 	
+	/**
+	 * Metoda folosita pentru a verifica existenta unei roviniete in evidenta
+	 * Se utilizeaza seria sasiului automobilului pentru care este inregistrat rovinieta
+	 * @param serieSasiu
+	 * @return
+	 */
 	public boolean rovinietaExista(String serieSasiu) {
 		if(nrRovinieta != 0) {
 			System.out.println(nrRovinieta);

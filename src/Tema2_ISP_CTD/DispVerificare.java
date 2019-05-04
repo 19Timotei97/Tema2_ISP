@@ -134,7 +134,7 @@ public class DispVerificare extends Date_Rovinieta {
 	 		return;
 		
 		for(int i=0; i<nrRoviniete; ++i)
-			System.out.println(rovinieta[i] + " ");
+			rovinieta[i].afisareDate();
 	}
 
 	/**
@@ -149,6 +149,7 @@ public class DispVerificare extends Date_Rovinieta {
 		else return false;
 	}
 	
+	@Override
 	public boolean verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) {
 		if(evidenta.rovinietaExista(serieSasiu))
 			if(!evidenta.rovinietaExpirata(serieSasiu))
