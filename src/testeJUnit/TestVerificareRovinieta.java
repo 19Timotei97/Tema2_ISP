@@ -8,7 +8,9 @@ import Tema2_ISP_CTD.Evidenta;
 import Tema2_ISP_CTD.Proprietar_masina;
 
 class TestVerificareRovinieta {
-
+	/**
+	 * Bidila Timotei 334 AA
+	 */
 	@Test
 	void testVerificareRovinieta() 
 	{
