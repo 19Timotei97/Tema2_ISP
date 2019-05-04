@@ -30,7 +30,7 @@ public class Camera {
 	
 	Camera(String idCamera){
 		this.idCamera = idCamera;
-		stareCam = StariCamera.Pornita;
+		StareCam = StariCamera.Pornita;
 		
 	}
 
@@ -61,10 +61,9 @@ public class Camera {
 	 * 
 	 */
 	
-	public String transmitereDate() {
-		
-		
-		stareCam = StariCamera.DateTransmise;
+	public String transmitereDate() 
+	{
+		StareCam = StariCamera.DateTransmise;
 		return nrInmatriculare;
 	}
 
@@ -72,12 +71,11 @@ public class Camera {
 	/**
 	 * 
 	 */
-	public void identificareNrMasina() {
+	public boolean identificareNrMasina() {
 		if(img.getNrMasina() != null) {
 			this.nrInmatriculare = img.getNrMasina();
-			stareCam = StariCamera.NrIdentificat;
+			StareCam = StariCamera.NrIdentificat;
 			return true;
-		
 		}
 		return false;
 	}
@@ -86,7 +84,7 @@ public class Camera {
 	 * 
 	 */
 	public void capturareImagine() {
-		stareCam = StariCamera.ImagineCapturata;
-		this.img = imagine;
+		StareCam = StariCamera.ImagineCapturata;
+		this.img = img;
 	}
 };
