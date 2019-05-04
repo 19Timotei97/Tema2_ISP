@@ -91,4 +91,12 @@ public class Evidenta {
 		}
 		return false;
 	}
+	
+	public String getNrInmatriculare(String serieSasiu) {
+		for(int i=0; i<nrRovinieta; ++i) {
+			if( serieSasiu.equals( rovinieta[i].getSerieSasiu() ) )
+				return rovinieta[i].getNrInmatriculare();
+		}
+		return "";
+	}
 };

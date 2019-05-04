@@ -13,6 +13,7 @@ public class Date_Rovinieta {
 	 * 
 	 * @param ID 
 	 */
-	public void verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) {
+	public boolean verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) {
+		return true;
 	}
 };

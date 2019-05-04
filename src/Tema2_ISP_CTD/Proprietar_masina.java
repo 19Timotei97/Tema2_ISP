@@ -80,6 +80,23 @@ public class Proprietar_masina extends Date_Rovinieta {
 		}
 	}
 	
-	public void introducereDate(Evidenta evidenta) {
+	void afisare() {
+		System.out.println("Detalii proprietar masina!");
+		System.out.println("Nume: " + nume);
+		System.out.println("CNP: " + cnp);
+		System.out.println("Adresa: " + adresa);
+		System.out.println("Rovinieta: ");
+		this.rovinieta.afisareDate();
+	}
+	
+	public boolean introducereDate(String serieSasiu, String nrInmatriculare, Evidenta evidenta) {
+		if(!evidenta.rovinietaExista(serieSasiu)) {
+			Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu, 99);
+			evidenta.adaugaRovinieta(temp);
+			
+			this.rovinieta = temp;
+		}
+		else if(!evidenta.rovinietaExpirata(serieSasiu)) return true;
+		return false;
 	}
 };

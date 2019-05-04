@@ -12,59 +12,100 @@ public class DispVerificare extends Date_Rovinieta {
 	/**
 	 * 
 	 */
-	private String idDispVerif;
+	private static int nrRoviniete;
 	/**
 	 * 
 	 */
 	private Rovinieta[] rovinieta;
-
-	public String getIdDispVerif() {
-		return idDispVerif;
-	}
-
-	public void setIdDispVerif(String idDispVerif) {
-		this.idDispVerif = idDispVerif;
-	}
-
-	public Rovinieta[] getRovinieta() {
-		return rovinieta;
-	}
-
-	public void setRovinieta(Rovinieta[] rovinieta) {
-		rovinieta = new Rovinieta[rovinieta.length];
-		
-		for(int i = 0; i < rovinieta.length; ++i)
-			this.rovinieta[i] = rovinieta[i];
-	}
-
-	public String getSerieSas() {
-		return serieSas;
-	}
-
-	public void setSerieSas(String serieSas) {
-		this.serieSas = serieSas;
-	}
-
-	private String serieSas;
 	
 	/**
 	 * 
-	 */
-	public void alertarePolitie() {
+	 */	public void afiseazaRoviniete() {
+			for(int i=0; i<nrRoviniete; ++i)
+				System.out.println(rovinieta[i] + " ");
+		}
+		
+		public Rovinieta[] getRovinieta() {
+			return this.rovinieta;
+		}
+
+		public void setRovinieta(Rovinieta[] rovinieta, int lungime) {
+			for(int i=0; i<lungime; ++i) {
+				this.rovinieta[nrRoviniete] = rovinieta[i];
+				nrRoviniete = nrRoviniete +1;
+			}
+		}
+		
+		public void adaugaRovinieta(Rovinieta rovinieta) {
+			this.rovinieta[nrRoviniete] = rovinieta;
+			nrRoviniete = nrRoviniete +1;
+		}
+		
+		public boolean scoateRovinieta(Rovinieta rovinieta) {
+			boolean ok=false;
+			for(int i=0; i<nrRoviniete; ++i) {
+				if(ok) {
+					this.rovinieta[i-1] = this.rovinieta[i];
+				}
+				if(this.rovinieta[i] == rovinieta)
+					ok=true;
+			}
+			if(ok) {
+				nrRoviniete = nrRoviniete -1;
+				return true;
+			}
+			else return false;
+		}
+		
+		public boolean scoateRovinieta(int numar) {
+			if(numar < nrRoviniete) {
+				for(int i=numar+1; i<nrRoviniete; ++i) {
+					this.rovinieta[i-1] = this.rovinieta[i];
+				}
+				return true;
+			}
+			else return false;
+		}
+	
+	
+	
+	public void alertarePolitie(Rovinieta rovinieta) {
+		System.out.println("Politia a fost alertata pentru rovinieta cu datele:");
+		rovinieta.afisareDate();
+		System.out.println("Un agent al politiei va fi trimis catre dumneavoastra!");
 	}
 
 	/**
 	 * 
 	 */
 	public void listaRoviniete() {
+		for(int i=0; i<nrRoviniete; ++i)
+			System.out.println(rovinieta[i]);
 	}
 
 	/**
 	 * 
 	 */
-	public void preluareDateRovinieta() {
+	public boolean preluareDateRovinieta(String serieSasiu, Evidenta evidenta) {
+		String nr ="";
+		if(evidenta.rovinietaExista(serieSasiu))
+			if(evidenta.getNrInmatriculare(serieSasiu) != "")
+				nr = evidenta.getNrInmatriculare(serieSasiu);
+		if(verificareRovinieta(nr, serieSasiu, evidenta)) return true;
+		else return false;
 	}
 	
-	public void verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) {
+	public boolean verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) {
+		if(evidenta.rovinietaExista(serieSasiu))
+			if(!evidenta.rovinietaExpirata(serieSasiu))
+				return true;
+		
+		Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu, 99);
+		rovinieta[nrRoviniete] = temp;
+		nrRoviniete = nrRoviniete +1;
+		
+		System.out.println("Rovinieta expirata! Inceperea procesului de alertare politie!");
+		alertarePolitie(temp);
+		return false;
 	}
 };
