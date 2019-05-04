@@ -33,6 +33,11 @@ public class DispVerificare extends Date_Rovinieta {
 		{
 			return rovinieta[i];
 		}
+		
+		public Rovinieta[] getRovinieta()
+		{
+			return rovinieta;
+		}
 
 		public void setRovinieta(Rovinieta[] rovinieta, int lungime) 
 		{
