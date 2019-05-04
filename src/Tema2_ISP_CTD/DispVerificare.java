@@ -6,7 +6,7 @@ package Tema2_ISP_CTD;
 
 /************************************************************/
 /**
- * 
+ **
  */
 public class DispVerificare extends Date_Rovinieta {
 	/**
@@ -34,6 +34,10 @@ public class DispVerificare extends Date_Rovinieta {
 				this.rovinieta[nrRoviniete] = rovinieta[i];
 				nrRoviniete = nrRoviniete +1;
 			}
+		}
+		
+		public int getNrRoviniete() {
+			return nrRoviniete;
 		}
 		
 		public void adaugaRovinieta(Rovinieta rovinieta) {

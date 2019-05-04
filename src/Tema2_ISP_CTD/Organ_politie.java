@@ -38,6 +38,13 @@ public class Organ_politie extends Date_Rovinieta {
 		return this.nume;
 	}
 	
+	public DispVerificare getDispVerif() {
+		return dispverif;
+	}
+	
+	public void setDispVerif(DispVerificare dispverif) {
+		this.dispverif = dispverif;
+	}
 	/**
 	 *  Fac override la fct verificareRovinieta din cls Date_Rovinieta 
 	 */
