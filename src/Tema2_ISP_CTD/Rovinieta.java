@@ -6,7 +6,7 @@ package Tema2_ISP_CTD;
 
 /************************************************************/
 /**
- * 
+ **
  */
 public class Rovinieta {
 	
@@ -54,17 +54,20 @@ public class Rovinieta {
 		this.idRovinieta = idRovinieta;
 	}
 
-	public void setSerieSasiu(String serieSasiu) {
-		this.serieSasiu = serieSasiu;
-	}
-	
-	//Adaosuri!!!!!!!!!!!!
 	public boolean getIsExpired() {
 		return isExpired;
 	}
 
+	public void setIsExpired(boolean isExpired) {
+		this.isExpired = isExpired;
+	}
+	
 	public String getSerieSasiu() {
 		return this.serieSasiu;
+	}
+	
+	public void setSerieSasiu(String serieSasiu) {
+		this.serieSasiu = serieSasiu;
 	}
 
 	public void afisareDate() 
