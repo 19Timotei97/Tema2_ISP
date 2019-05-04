@@ -87,7 +87,7 @@ public class DispVerificare extends Date_Rovinieta {
 	 * 
 	 */
 	public boolean preluareDateRovinieta(String serieSasiu, Evidenta evidenta) {
-		String nr ="";
+		String nr = "";
 		if(evidenta.rovinietaExista(serieSasiu))
 			if(evidenta.getNrInmatriculare(serieSasiu) != "")
 				nr = evidenta.getNrInmatriculare(serieSasiu);

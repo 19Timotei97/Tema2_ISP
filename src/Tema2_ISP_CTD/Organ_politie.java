@@ -10,14 +10,21 @@ import java.util.Calendar;
 
 /************************************************************/
 /**
- * CEva orice nimic oriceseafosjioghiorsh;gia
+ * 
  */
 public class Organ_politie extends Date_Rovinieta {
 	/**
 	 * 
 	 */
 	private String nume;
-
+	
+	private DispVerificare dispverif;
+	
+	public Organ_politie(String nume, DispVerificare dispV)
+	{
+		this.nume = nume;
+		
+	}
 	/**
 	 * 
 	 */
@@ -36,22 +43,19 @@ public class Organ_politie extends Date_Rovinieta {
 	 */
 	
 	@Override 
-	
-	public boolean verificareRovinieta(long id) {
-		if(super.verificareRovinieta(id) == false) {
-			 this.aplicareSanctiune();
+	public boolean verificareRovinieta(String nrInmat, String serieSasiu, Evidenta evidenta) {
+		if(dispverif.verificareRovinieta(nrInmat, serieSasiu, evidenta) == false) 
+		{
+			 aplicareSanctiune();
 			 return false;
 		}
 		return true;
-		
-		
-		
 	}
 	/*
 	 * 
 	 */
 	
-	public void aplicareSanctiune() {
+	public Sanctiune aplicareSanctiune() {
 		
 		String proba = "Rovinieta expirata";
 		
@@ -69,7 +73,6 @@ public class Organ_politie extends Date_Rovinieta {
 		 * 
 		 * !Vezi  ca obiectul meu "sanctiune" sa l apeleze ok.
 		 * 
-		 * fmm de egit
 		 */
 		return new Sanctiune(proba, data, loc, this);
 		

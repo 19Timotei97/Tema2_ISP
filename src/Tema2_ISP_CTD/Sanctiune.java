@@ -34,6 +34,15 @@ public class Sanctiune {
 	 */
 	private Proprietar_masina proprietar;
 	
+	public Sanctiune(String proba, String data, String loc, Organ_politie organPolitie)
+	{
+		this.proba = proba;
+		this.data = data;
+		this.loc = loc;
+		this.organPolitie = organPolitie;
+	}
+	
+	
 	public void setProba(String proba)
 	{
 		this.proba = proba;
