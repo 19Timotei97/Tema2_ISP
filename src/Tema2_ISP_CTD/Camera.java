@@ -54,6 +54,8 @@ public class Camera {
 	public void setStareCam(StariCamera stareCam) {
 		StareCam = stareCam;
 	}
+	
+	
 	/**
 	 * transmitereDate = getter pt nrInmatriculare
 	 * 
