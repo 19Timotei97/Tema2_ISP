@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_tf-B0G2QEemDGP-W1kN6ag" name="Tema2_ISP_CTD">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_tw6n4G2QEemDGP-W1kN6ag">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3E0cMG2QEemDGP-W1kN6ag" name="Rovinieta">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_QP3IUG2REemDGP-W1kN6ag" name="nrInmatriculare" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_UXkkkG2REemDGP-W1kN6ag" name="serieSasiu" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Uc04AG2REemDGP-W1kN6ag" name="idRovinieta" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_bFiRYG2REemDGP-W1kN6ag" name="afisareDate"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_66gUUG2QEemDGP-W1kN6ag" name="DispVerificare">
+    <generalization xmi:type="uml:Generalization" xmi:id="_DkGVcG2TEemDGP-W1kN6ag" general="_-N7z8G2QEemDGP-W1kN6ag"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s4hx4G2REemDGP-W1kN6ag" name="idDispVerif" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_q2__AG2REemDGP-W1kN6ag" name="alertarePolitie"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_rmNOYG2REemDGP-W1kN6ag" name="listaRoviniete"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_rsCJkG2REemDGP-W1kN6ag" name="preluareDateRovinieta"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_8CwV0G2QEemDGP-W1kN6ag" name="Proprietar_masina">
+    <generalization xmi:type="uml:Generalization" xmi:id="_CJh04G2TEemDGP-W1kN6ag" general="_-N7z8G2QEemDGP-W1kN6ag"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ckVKoG2REemDGP-W1kN6ag" name="nume" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_dHaCgG2REemDGP-W1kN6ag" name="cnp" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_dLFBkG2REemDGP-W1kN6ag" name="adresa" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_49sXcG2SEemDGP-W1kN6ag" name="rovinieta" visibility="private" type="_3E0cMG2QEemDGP-W1kN6ag" aggregation="composite" association="_49j0kG2SEemDGP-W1kN6ag"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_fnXd0G2REemDGP-W1kN6ag" name="introducereDate"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_-N7z8G2QEemDGP-W1kN6ag" name="Date_Rovinieta">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_5Vx8wG2REemDGP-W1kN6ag" name="verificareRovinieta" concurrency="concurrent">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_NEj0gG2SEemDGP-W1kN6ag" name="ID">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="__fzrgG2QEemDGP-W1kN6ag" name="Organ_politie">
+    <generalization xmi:type="uml:Generalization" xmi:id="_EJI8MG2TEemDGP-W1kN6ag" general="_-N7z8G2QEemDGP-W1kN6ag"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_O8yhcG2SEemDGP-W1kN6ag" name="nume" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TiN0cG2SEemDGP-W1kN6ag" name="aplicareSanctiune"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_BMi6IG2REemDGP-W1kN6ag" name="Camera">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_X1YSwG2SEemDGP-W1kN6ag" name="idCamera" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_X6FMkG2SEemDGP-W1kN6ag" name="nrInmatriculare" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_YcO3YG2SEemDGP-W1kN6ag" name="identificareNrMasina" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_YfAekG2SEemDGP-W1kN6ag" name="capturareImagine"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_B5pQsG2REemDGP-W1kN6ag" name="Sanctiune">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_zeCQ0G2SEemDGP-W1kN6ag" name="proba" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_zguYcG2SEemDGP-W1kN6ag" name="data" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_zjVnkG2SEemDGP-W1kN6ag" name="ora" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ztK5AG2SEemDGP-W1kN6ag" name="loc" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_HAzs4W2TEemDGP-W1kN6ag" name="organPolitie" visibility="private" type="__fzrgG2QEemDGP-W1kN6ag" aggregation="composite" association="_HAyewG2TEemDGP-W1kN6ag"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_NnuWgm2TEemDGP-W1kN6ag" name="proprietar" visibility="private" type="_8CwV0G2QEemDGP-W1kN6ag" aggregation="composite" association="_NntIYG2TEemDGP-W1kN6ag"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_EERVMG2REemDGP-W1kN6ag" name="StariCamera">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_FHJugG2REemDGP-W1kN6ag" name="Pornita"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_GMvdkG2REemDGP-W1kN6ag" name="ImagineCapturata"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_Gtv44G2REemDGP-W1kN6ag" name="ImagineProcesata"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_G4LnQG2REemDGP-W1kN6ag" name="DateTransmise"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_49j0kG2SEemDGP-W1kN6ag" visibility="public" memberEnd="_49sXcG2SEemDGP-W1kN6ag _49s-gm2SEemDGP-W1kN6ag">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_49pUIG2SEemDGP-W1kN6ag" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_49p7MG2SEemDGP-W1kN6ag" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_49s-gm2SEemDGP-W1kN6ag" type="_8CwV0G2QEemDGP-W1kN6ag" association="_49j0kG2SEemDGP-W1kN6ag"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_HAyewG2TEemDGP-W1kN6ag" visibility="public" memberEnd="_HAzs4W2TEemDGP-W1kN6ag _HA0T8m2TEemDGP-W1kN6ag">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_HAzF0G2TEemDGP-W1kN6ag" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_HAzs4G2TEemDGP-W1kN6ag" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_HA0T8m2TEemDGP-W1kN6ag" type="_B5pQsG2REemDGP-W1kN6ag" association="_HAyewG2TEemDGP-W1kN6ag"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_NntIYG2TEemDGP-W1kN6ag" memberEnd="_NnuWgm2TEemDGP-W1kN6ag _Nnu9km2TEemDGP-W1kN6ag">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_NnuWgG2TEemDGP-W1kN6ag" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_NnuWgW2TEemDGP-W1kN6ag" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Nnu9km2TEemDGP-W1kN6ag" type="_B5pQsG2REemDGP-W1kN6ag" association="_NntIYG2TEemDGP-W1kN6ag"/>
+  </packagedElement>
+</uml:Model>

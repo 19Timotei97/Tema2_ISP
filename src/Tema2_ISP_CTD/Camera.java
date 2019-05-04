@@ -21,6 +21,18 @@ public class Camera {
 	 * 
 	 */
 	private StariCamera StareCam;
+	
+	/**
+	 * 
+	 */
+	private Imagine img;
+	
+	
+	Camera(String idCamera){
+		this.idCamera = idCamera;
+		stareCam = StariCamera.Pornita;
+		
+	}
 
 	public String getIdCamera() {
 		return idCamera;
@@ -30,10 +42,7 @@ public class Camera {
 		this.idCamera = idCamera;
 	}
 
-	public String getNrInmatriculare() {
-		return nrInmatriculare;
-	}
-
+	
 	public void setNrInmatriculare(String nrInmatriculare) {
 		this.nrInmatriculare = nrInmatriculare;
 	}
@@ -45,16 +54,37 @@ public class Camera {
 	public void setStareCam(StariCamera stareCam) {
 		StareCam = stareCam;
 	}
+	/**
+	 * transmitereDate = getter pt nrInmatriculare
+	 * 
+	 */
+	
+	public String transmitereDate() {
+		
+		
+		stareCam = StariCamera.DateTransmise;
+		return nrInmatriculare;
+	}
+
 
 	/**
 	 * 
 	 */
 	public void identificareNrMasina() {
+		if(img.getNrMasina() != null) {
+			this.nrInmatriculare = img.getNrMasina();
+			stareCam = StariCamera.NrIdentificat;
+			return true;
+		
+		}
+		return false;
 	}
 
 	/**
 	 * 
 	 */
 	public void capturareImagine() {
+		stareCam = StariCamera.ImagineCapturata;
+		this.img = imagine;
 	}
 };
