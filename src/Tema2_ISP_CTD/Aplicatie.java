@@ -1,6 +1,7 @@
 package Tema2_ISP_CTD;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Aplicatie {
 
@@ -12,7 +13,11 @@ public class Aplicatie {
 		try {
 			propMas1.introducereDate("B18ECK", "ZF893FQ", evidenta);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			evidenta.schimbaData(new SimpleDateFormat("dd/MM/yyyy").parse("10/10/2018"), 0);
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		evidenta.afiseazaRoviniete();

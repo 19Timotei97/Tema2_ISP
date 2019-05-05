@@ -4,6 +4,8 @@
 
 package Tema2_ISP_CTD;
 
+import java.util.Date;
+
 /************************************************************/
 /**
  * 
@@ -45,10 +47,18 @@ public class Evidenta {
 		return nrRovinieta;
 	}
 	
+	public void schimbaData(Date date, int i)
+	{
+		if(rovinieta != null)
+			rovinieta[i].setData(date);
+	}
 	
-	public void afiseazaRoviniete() {
-		for(int i=0; i<nrRovinieta; ++i)
-			rovinieta[i].afisareDate();
+	
+	public void afiseazaRoviniete() 
+	{
+		if(rovinieta != null && nrRovinieta > 0)
+			for(int i=0; i<nrRovinieta; ++i)
+				rovinieta[i].afisareDate();
 	}
 	
 	/**

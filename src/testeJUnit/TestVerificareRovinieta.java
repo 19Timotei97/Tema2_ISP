@@ -25,6 +25,15 @@ class TestVerificareRovinieta {
 		
 		assertTrue(propMas1.verificareRovinieta("B18ECK", "ZF893FQ", evidenta));
 		
+
+		Proprietar_masina propMas2 = new Proprietar_masina("Marcel Dan", "19205278913514", "Bd. Ion Mihalache Nr. 14");
+		Evidenta evidenta1 = new Evidenta();
+		propMas2.introducereDate("B20YBC", "JK201AB", evidenta1);
+		evidenta1.schimbaData(new SimpleDateFormat("dd/MM/yyyy").parse("15/12/2018"), 0);
+		
+		assertFalse(propMas2.verificareRovinieta("B10YBC", "JK201AB", evidenta1));
+		
+		
 	}
 
 }

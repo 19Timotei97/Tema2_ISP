@@ -4,9 +4,7 @@
 
 package Tema2_ISP_CTD;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -125,6 +123,7 @@ public class Proprietar_masina extends Date_Rovinieta {
 	 * Metoda prin care un proprietar isi poate verifica Rovinieta. Se introduc nr de inmatriculare, seria sasiului si se mai accepta si un parametru
 	 * de tip evidenta, in care se va cauta rovinieta.
 	 */
+	@SuppressWarnings("deprecation")
 	public boolean verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) 
 	{
 		Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
@@ -135,19 +134,19 @@ public class Proprietar_masina extends Date_Rovinieta {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		if(Calendar.getInstance().get(Calendar.YEAR) == temp.getData().getYear()) {
+				
+		if(Calendar.getInstance().get(Calendar.YEAR) == temp.getData().getYear())
 			if(((Calendar.getInstance().get(Calendar.MAY)) + 1) - (temp.getData().getMonth() + 1) < 6)
 				temp.setIsExpired(false);
-		}
-		else temp.setIsExpired(false);
+		else temp.setIsExpired(true);
+		
 		if(evidenta.rovinietaExista(serieSasiu)) {
-			if(!evidenta.rovinietaExpirata(serieSasiu))
-			{
-				System.out.println("Rovinieta exista si nu a expirat!");
-				return true;
-			}
+			if(temp.getSerieSasiu() == serieSasiu)
+				if(!evidenta.rovinietaExpirata(serieSasiu))
+				{
+					System.out.println("Rovinieta exista si nu a expirat!");
+					return true;
+				}
 		}
 		
 		else 
