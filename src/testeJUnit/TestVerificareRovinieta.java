@@ -31,7 +31,7 @@ class TestVerificareRovinieta {
 		propMas2.introducereDate("B20YBC", "JK201AB", evidenta1);
 		evidenta1.schimbaData(new SimpleDateFormat("dd/MM/yyyy").parse("15/12/2018"), 0);
 		
-		assertFalse(propMas2.verificareRovinieta("B10YBC", "JK201AB", evidenta1));
+		assertFalse(propMas2.verificareRovinieta("B20YBC", "JA301AB", evidenta1));
 		
 		
 	}

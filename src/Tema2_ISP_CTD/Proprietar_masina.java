@@ -100,7 +100,7 @@ public class Proprietar_masina extends Date_Rovinieta {
 	 * @throws ParseException 
 	 */
 	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta) throws ParseException {
-		if(rovinieta == null) {
+		if(rovinieta == null && evidenta != null) {
 			if(evidenta.rovinietaExista(serieSasiu) == false) 
 			{
 				Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
@@ -131,6 +131,7 @@ public class Proprietar_masina extends Date_Rovinieta {
 		try {
 			date = new Date();
 			temp.setData(date);
+			evidenta.adaugaRovinieta(temp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

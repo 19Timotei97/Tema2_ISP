@@ -1,5 +1,6 @@
 package Tema2_ISP_CTD;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -7,20 +8,12 @@ public class Aplicatie {
 
 	public static void main(String[] args) {
 
-		Proprietar_masina propMas1 = new Proprietar_masina("Gigel Ionel", "1860316224495", "Str Caramizilor Nr. 23");
-		Evidenta evidenta = new Evidenta();
-	
-		try {
-			propMas1.introducereDate("B18ECK", "ZF893FQ", evidenta);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		try {
-			evidenta.schimbaData(new SimpleDateFormat("dd/MM/yyyy").parse("10/10/2018"), 0);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		evidenta.afiseazaRoviniete();
+		Proprietar_masina propMas2 = new Proprietar_masina("Marcel Dan", "19205278913514", "Bd. Ion Mihalache Nr. 14");
+		Evidenta evidenta1 = new Evidenta();
+		Rovinieta rov = new Rovinieta("B20YBC", "JK201AB");
+		rov.afisareDate();
+		
+		
 		/*
 		Organ_politie oPolitie1;
 		Proprietar_masina propMas1;

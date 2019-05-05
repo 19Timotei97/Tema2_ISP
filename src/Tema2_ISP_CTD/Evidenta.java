@@ -51,6 +51,12 @@ public class Evidenta {
 	{
 		if(rovinieta != null)
 			rovinieta[i].setData(date);
+		
+		if(new Date().getYear() == rovinieta[i].getData().getYear()) {
+			if(new Date().getMonth() - rovinieta[i].getData().getMonth() < 6)
+				rovinieta[i].setIsExpired(false);
+		}
+		else rovinieta[i].setIsExpired(true);
 	}
 	
 	
@@ -87,9 +93,9 @@ public class Evidenta {
 			nrRovinieta = nrRovinieta +1;
 			Rovinieta temp = this.rovinieta[nrRovinieta-2];
 			
-			this.rovinieta = new Rovinieta[nrRovinieta]; //marit spatiul la 2
-			this.rovinieta[nrRovinieta -2] = temp;       // pe 0 punem temp
-			this.rovinieta[nrRovinieta -1] = rovinieta;  // pe 1 punem rovinieta pe care o vrem
+			this.rovinieta = new Rovinieta[nrRovinieta]; // marit spatiul la 2
+			this.rovinieta[nrRovinieta - 2] = temp;      // pe 0 punem temp
+			this.rovinieta[nrRovinieta - 1] = rovinieta; // pe 1 punem rovinieta pe care o vrem
 		} 
 		else {
 			nrRovinieta = nrRovinieta +1;
@@ -137,13 +143,12 @@ public class Evidenta {
 	 * @param serieSasiu
 	 * @return
 	 */
-	public boolean rovinietaExista(String serieSasiu) {
-		if(nrRovinieta != 0) {
-			System.out.println(nrRovinieta);
+	public boolean rovinietaExista(String serieSasiu) 
+	{
+		if(nrRovinieta != 0 && rovinieta != null) 
+		{
 			this.afiseazaRoviniete();
 			for(int i=0; i<nrRovinieta; ++i) {
-				System.out.println(rovinieta[i].getSerieSasiu());
-				
 				if( serieSasiu.equals( rovinieta[i].getSerieSasiu() ) ) {
 					System.out.println("rovinietaExista() -> Rovinieta are serieSasiu la fel");
 					return true;

@@ -43,6 +43,7 @@ public class Rovinieta {
 	{
 		nrInmatriculare = nrInmat;
 		this.serieSasiu = serieSasiu;
+		setData(new Date());
 	}
 	
 	public Rovinieta(String nrInmat, String serieSasius, long idRov)
