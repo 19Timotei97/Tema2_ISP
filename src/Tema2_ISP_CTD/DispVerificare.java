@@ -32,9 +32,9 @@ public class DispVerificare extends Date_Rovinieta {
 	String date;
 	
 	public DispVerificare() {
-		nrRoviniete =0;
-		rovinieta =null;
-		evidenta =new Evidenta();
+		nrRoviniete = 0;
+		rovinieta = null;
+		evidenta = new Evidenta();
 	}
 	
 	public DispVerificare(CanalComunicatie can)
@@ -150,12 +150,15 @@ public class DispVerificare extends Date_Rovinieta {
 	 * Se salveaza in Stringul date informatiile de pe canalul de comunicatie
 	 */
 	public boolean acceptareDate () {
-		if(this.canal != null) {
-			this.date = canal.transmitereDate();
+		String captareDate = canal.transmitereDate();
+		if(this.canal != null && captareDate != null) {
+			this.date = captareDate;
+			//System.out.print("Conectare reusita");
 			System.out.println(this.date);
 			return true;
 		}
-		return false;	
+		//System.out.println("Eroare de conectare a Dispozitivului de Verificare la Canal");
+		return false;
 	}
 	
 	public boolean adaugaRovinieta(Rovinieta rovinieta) 

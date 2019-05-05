@@ -59,13 +59,28 @@ public class Organ_politie extends Date_Rovinieta {
 		}
 		return 1;
 	}
-	/*
-	 * 
-	 */
 	
+	/**
+     * Prin aceasta metoda se primeste semnalul de la un dispozitiv de verificare
+     */
+	public void primireSemnal(String departament) {
+       System.out.println("Semnal primit de sectia " + departament);
+       trimiterePolitist();
+   }
+
+   /**
+    *  Prin aceasta metoda se asigneaza politistul catre infractor
+    */
+   public void trimiterePolitist() {
+       System.out.println("Politistul " + nume + "a fost trimis catre locatie.");
+   }
+	
+	/**
+	 * Metoda de aplicare a sanctiunii cu locul, proba, data si organul de politie ce o aplica
+	 */
 	public Sanctiune aplicareSanctiune() {
 		
-		System.out.println("Sunt in aplicareSanctiune!");
+		System.out.println("Sanctiunea a fost aplicata!");
 		
 		String proba = "Rovinieta expirata";
 		
@@ -77,13 +92,6 @@ public class Organ_politie extends Date_Rovinieta {
 		
 		String data = dateFormat.format(cal.getTime()).toString();
 		
-		
-		/**
-		 * Ba, am scos campul ora din sanctiune, ca oricum o sa fie in data
-		 * 
-		 * !Vezi  ca obiectul meu "sanctiune" sa l apeleze ok.
-		 * 
-		 */
 		return new Sanctiune(proba, data, loc, this);
 		
 	}

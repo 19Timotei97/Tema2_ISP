@@ -95,14 +95,16 @@ public class Evidenta {
 		cal.setTime(data);
 		
 		if(Calendar.getInstance().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) {
-			if(((Calendar.getInstance().get(Calendar.MAY)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6)
+			if(((Calendar.getInstance().get(Calendar.MONTH)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6)
 				rovinieta[i].setIsExpired(false);
 			else rovinieta[i].setIsExpired(true);
 		}
 		else rovinieta[i].setIsExpired(true);
 	}
 	
-	
+	/**
+	 * Metoda ce afiseaza fiecare rovinieta din vectorul de roviniete
+	 */
 	public void afiseazaRoviniete() 
 	{
 		if(rovinieta != null && nrRovinieta > 0)
@@ -114,7 +116,8 @@ public class Evidenta {
 	
 	/**
 	 * Metoda folosita pentru a verifica existenta unei roviniete in evidenta
-	 * Se utilizeaza seria sasiului automobilului pentru care este inregistrat rovinieta
+	 * Se utilizeaza seria sasiului automobilului pentru care este inregistrata rovinieta
+	 * sau nr de inmatriculare iar in optiune se trece fie "sasiu" fie "inmatr", in functie de preferinta.
 	 * @param serieSasiu
 	 * @return
 	 */
@@ -149,21 +152,20 @@ public class Evidenta {
 		return false;
 	}
 	
+	/**
+	 * Metoda folosita pentru a verifica valabilitatea rovinietei in functie de seria sasiului
+	 */
 	public boolean rovinietaExpirata(String serieSasiu) {
 		
 		for(int i=0; i<nrRovinieta; ++i) {
 			if( serieSasiu.equals( rovinieta[i].getSerieSasiu() ) ) {
 				
-				System.out.println("\n\n");
-				rovinieta[i].afisareDate();
 				Date date = rovinieta[i].getData();
 		        Calendar cal = Calendar.getInstance();
 		        cal.setTime(date);
 
 		        if(Calendar.getInstance().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) {
-		            System.out.println("La ani!");
 		        	if(((Calendar.getInstance().get(Calendar.MONTH)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6) {
-		            	System.out.println("La luni");
 		            	rovinieta[i].setIsExpired(false);
 		            	return false;
 		            }
@@ -179,7 +181,6 @@ public class Evidenta {
 		        }
 			}
 		}
-		System.out.println("Afara din for");
 		return false;
 	}
 	
@@ -190,8 +191,8 @@ public class Evidenta {
 	public void adaugaRovinieta(Rovinieta rovinieta) {
 		
 		if(nrRovinieta > 1) {
-			//nrRov =2
-			nrRovinieta = nrRovinieta +1; //nrRov = 3
+			//nrRov = 2 sau mai mare
+			nrRovinieta = nrRovinieta +1;
 			Rovinieta temp[] = new Rovinieta[nrRovinieta]; 
 			
 			for(int i=0; i<nrRovinieta-1; ++i)
@@ -215,7 +216,7 @@ public class Evidenta {
 		} 
 		else if(nrRovinieta == 0){
 			nrRovinieta = nrRovinieta +1;
-			this.rovinieta = new Rovinieta[nrRovinieta]; //aloc 1 spatiu
+			this.rovinieta = new Rovinieta[nrRovinieta]; // aloc 1 spatiu
 			this.rovinieta[nrRovinieta-1] = rovinieta;   // pun pe pozitia 1-1=0 pe rovinieta
 		} 
 		
@@ -249,12 +250,15 @@ public class Evidenta {
 			for(int i=numar+1; i<nrRovinieta; ++i) {
 				this.rovinieta[i-1] = this.rovinieta[i];
 			}
-			nrRovinieta = nrRovinieta -1;
+			nrRovinieta = nrRovinieta - 1;
 			return true;
 		}
 		else return false;
 	}
 	
+	/**
+	 * Returneaza numarul de inmatriculare in functie de seria sasiului data ca parametru
+	 */
 	public String getNrInmatriculare(String serieSasiu) {
 		for(int i=0; i<nrRovinieta; ++i) {
 			if( serieSasiu.equals( rovinieta[i].getSerieSasiu() ) )
@@ -263,6 +267,9 @@ public class Evidenta {
 		return "nimic";
 	}
 
+	/**
+	 * Returneaza seria sasiului in functie de nr de inmatriculare dat ca parametru
+	 */
 	public String getSerieSasiu(String nrInmatriculare) {
 		for(int i=0; i<nrRovinieta; ++i) {
 			if( nrInmatriculare.equals( rovinieta[i].getNrInmatriculare() ) )
@@ -271,6 +278,9 @@ public class Evidenta {
 		return "nimic";
 	}
 	
+	/**
+	 *	Returneaza ultima rovinieta din vectorul de roviniete din evidenta 
+	 */
 	public Rovinieta getUltimaRovinieta() 
 	{
 		if(rovinieta != null)

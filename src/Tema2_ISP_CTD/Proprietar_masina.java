@@ -81,7 +81,7 @@ public class Proprietar_masina extends Date_Rovinieta {
 	/**
 	 * Metoda prin care se afiseaza datele proprietarului precum si ale rovinietei sale
 	 */
-	void afisare() {
+	public void afisare() {
 		System.out.println("Detalii proprietar masina!");
 		System.out.println("Nume: " + nume);
 		System.out.println("CNP: " + cnp);
@@ -90,6 +90,15 @@ public class Proprietar_masina extends Date_Rovinieta {
 			System.out.println("Rovinieta: ");
 			this.rovinieta.afisareDate();
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void afisareDateRovinieta()
+	{
+		if(rovinieta != null)
+			rovinieta.afisareDate();
 	}
 	
 	/**
@@ -156,7 +165,8 @@ return false;
 						System.out.println("Rovinieta este in termen. Circulati cu atentie!");
 						return true;
 					}
-					else {
+					else 
+					{
 						System.out.println("Rovinieta expirata! Aveti grija sa o refaceti cat de curand!");
 						return false;
 					}
@@ -164,9 +174,11 @@ return false;
 				else
 				{
 					System.out.println("Numarul de inmatriculare nu a fost introdus cum trebuie!");
+					return false;
 				}
 			}
-			else {
+			else 
+			{
 				System.out.println("Seria sasiului nu a fost introdusa cum trebuie!");
 				return false;
 			}

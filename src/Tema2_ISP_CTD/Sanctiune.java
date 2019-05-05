@@ -20,7 +20,7 @@ public class Sanctiune {
 
 	private Proprietar_masina proprietar;
 	
-	/*
+	/**
 	 * Constructor ce primeste parametrii necesari crearii unei sanctiuni
 	 */
 	public Sanctiune(String proba, String data, String loc)
@@ -30,7 +30,7 @@ public class Sanctiune {
 		this.loc = loc;
 	}
 	
-	/*
+	/**
 	 * 	Constructor ce primeste pe langa datele de creare a unei sanctiuni, si un organ de politie
 	 * catre care va fi asignata.
 	 */
@@ -42,7 +42,7 @@ public class Sanctiune {
 		this.organPolitie = organPolitie;
 	}
 	
-	/*
+	/**
 	 * Getteri, respectiv setteri pentru fiecare atribut al clasei
 	 */
 	public void setProba(String proba)

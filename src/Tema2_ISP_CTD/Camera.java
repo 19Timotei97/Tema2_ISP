@@ -62,22 +62,23 @@ public class Camera {
 
 
 	/**
-	 * 
+	 * Se identifica numarul masinii si se verifica ca numarul este valid
 	 */
 	public boolean identificareNrMasina() {
-	String nrMasina = img.getNrMasina();
-	if(nrMasina != null && !nrMasina.equals("") && !nrMasina.equals(" ")) {
-		this.nrInmatriculare = nrMasina;
-		StareCam = StariCamera.NrIdentificat;
-		System.out.println("Cofirmare existenta date!");
-		return true;
-	}
-	System.out.println("Nu sunt date disponibile!");
-	return false;
+		String nrMasina = img.getNrMasina();
+		if(nrMasina != null && !nrMasina.equals("") && !nrMasina.equals(" ") && nrMasina.length() <= 8 
+				&& nrMasina.equals(nrMasina.toUpperCase())  ) {
+			this.nrInmatriculare = nrMasina;
+			StareCam = StariCamera.NrIdentificat;
+			System.out.println("Cofirmare existenta date!");
+			return true;
+		}
+		System.out.println("Nu sunt date disponibile!");
+		return false;
 	}
 
 	/**
-	 * 
+	 * Se captureaza imaginea si se seteaza noua stare
 	 */
 	public void capturareImagine(Imagine imag) {
 		StareCam = StariCamera.ImagineCapturata;
