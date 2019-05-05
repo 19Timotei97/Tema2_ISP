@@ -139,7 +139,11 @@ public class DispVerificare extends Date_Rovinieta {
 		return canal;
 	}
 	
-
+	public String getDate()
+	{
+		if(date != null || date != "") return date;
+		return "";
+	}
 	/**
 	 * 
 	 */
@@ -202,22 +206,24 @@ public class DispVerificare extends Date_Rovinieta {
 		if(evidenta.rovinietaExista(serieSasiu, "sasiu")) {
 			if(evidenta.rovinietaExpirata(serieSasiu) == false) {
 				this.adaugaRovinieta(temp);
-				verificareDate(true);
+				verificareDate(1);
 				return 1;
 			} else {
 				System.out.println("Rovinieta expirata! Inceperea procesului de alertare politie!");
 				verificareProximitatePolitie();
-				verificareDate(false);
+				verificareDate(2);
 				return 2;}
 		} 
 		verificareProximitatePolitie();
 		System.out.println("Rovinieta incorecta! Inceperea procesului de alertare politie!");
-		verificareDate(false);
+		verificareDate(3);
 		return 3;
 	}
 	
-	public boolean verificareDate(boolean temp) {
-		return temp;
+	public boolean verificareDate(int temp) {
+		if(temp == 1) return true;
+		else if (temp == 2 || temp == 3) return false;
+		return false;
 	}
 	
 	public boolean alertarePolitie(String departament, int distanta) {
@@ -261,41 +267,41 @@ public class DispVerificare extends Date_Rovinieta {
 	
 	public boolean adaugaRovinieta(Rovinieta rovinieta) 
 	{
-		
-		if(nrRoviniete > 1) {
-			
-			nrRoviniete = nrRoviniete +1; 
-			Rovinieta temp[] = new Rovinieta[nrRoviniete]; 
-			
-			for(int i=0; i<nrRoviniete-1; ++i)
-				temp[i] = this.rovinieta[i];
-			
-			temp[nrRoviniete-1] = rovinieta;
-			
-			this.rovinieta = new Rovinieta[nrRoviniete];
-			
-			for(int i=0; i<nrRoviniete; ++i)
-				this.rovinieta[i] = temp[i];
-			return true;
-		} 
-		else if(nrRoviniete == 1)
-		{
-			nrRoviniete = nrRoviniete +1;
-			Rovinieta temp = this.rovinieta[nrRoviniete-2];
-			
-			this.rovinieta = new Rovinieta[nrRoviniete]; //marit spatiul la 2
-			this.rovinieta[nrRoviniete -2] = temp;       // pe 0 punem temp
-			this.rovinieta[nrRoviniete -1] = rovinieta;  // pe 1 punem rovinieta pe care o vrem
-			return true;
-		} 
-		else if(nrRoviniete == 0){
-			nrRoviniete = nrRoviniete +1;
-			this.rovinieta = new Rovinieta[nrRoviniete]; //aloc 1 spatiu
-			this.rovinieta[nrRoviniete-1] = rovinieta;   // pun pe pozitia 1-1=0 pe rovinieta
-			return true;
-		} 
+		if(evidenta.rovinietaExista(rovinieta.getNrInmatriculare(), "inmatr"))
+			if(nrRoviniete > 1) {
+				
+				nrRoviniete = nrRoviniete +1; 
+				Rovinieta temp[] = new Rovinieta[nrRoviniete]; 
+				
+				for(int i=0; i<nrRoviniete-1; ++i)
+					temp[i] = this.rovinieta[i];
+				
+				temp[nrRoviniete-1] = rovinieta;
+				
+				this.rovinieta = new Rovinieta[nrRoviniete];
+				
+				for(int i=0; i<nrRoviniete; ++i)
+					this.rovinieta[i] = temp[i];
+				return true;
+			} 
+			else if(nrRoviniete == 1)
+			{
+				nrRoviniete = nrRoviniete +1;
+				Rovinieta temp = this.rovinieta[nrRoviniete-2];
+				
+				this.rovinieta = new Rovinieta[nrRoviniete]; //marit spatiul la 2
+				this.rovinieta[nrRoviniete -2] = temp;       // pe 0 punem temp
+				this.rovinieta[nrRoviniete -1] = rovinieta;  // pe 1 punem rovinieta pe care o vrem
+				return true;
+			} 
+			else if(nrRoviniete == 0){
+				nrRoviniete = nrRoviniete +1;
+				this.rovinieta = new Rovinieta[nrRoviniete]; //aloc 1 spatiu
+				this.rovinieta[nrRoviniete-1] = rovinieta;   // pun pe pozitia 1-1=0 pe rovinieta
+				return true;
+			} 
+			else return false;
 		else return false;
-		
 	}
 	
 	public boolean scoateRovinieta(Rovinieta rovinieta) {

@@ -20,9 +20,13 @@ class TestAlertarePolitie {
 	
 	@Test
 	/**
-	 * Testez accepta date 
+	 * Testez modul de acceptare al datelor de catre dispozitivul de verificare, atunci cand primeste date de la o camera
 	 */
 	void testDateDisponibile1() {
+		
+		System.out.println("/**********************************************************");
+		System.out.println("Testul 1");
+		System.out.println("**********************************************************/");
 		
 		DispVerificare disp = new DispVerificare();
 		Rovinieta r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
@@ -47,72 +51,174 @@ class TestAlertarePolitie {
 	
 	@Test
 	/**
-	 *  Testez preluare date
-	 */
+	 *  Testez modalitatea de preluare interna a datelor de catre Dispozitivul de verificare
+	 *  Metoda verifica daca numarul de inmatriculare exista, si daca acesta este asociat unei
+	 *  serii de sasiu
+ 	 */
 	void testDateDisponibile2() {
 		
-		Imagine imag2 = new Imagine("");
+		System.out.println("/**********************************************************");
+		System.out.println("Testul 2");
+		System.out.println("**********************************************************/");
+
+		DispVerificare disp = new DispVerificare();
+		Rovinieta r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
+		Rovinieta r2 = new Rovinieta("B33CCC", "353sdf", 15002l);
+		Rovinieta r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
+		Evidenta evid = new Evidenta();
+		
+		evid.adaugaRovinieta(r1);
+		evid.adaugaRovinieta(r2);	
+		evid.adaugaRovinieta(r3);
+		disp.setEvidenta(evid);
+		
+		Imagine imag2 = new Imagine("B22CCC");
 		Camera cam2 = new Camera("C2");
 		cam2.capturareImagine(imag2);
-		assertFalse(cam2.identificareNrMasina());	
+		cam2.identificareNrMasina();
+		CanalComunicatie can = new CanalComunicatie(cam2);
+		disp.setCanal(can);
+		
+		assertTrue(disp.preluareDateRovinieta(imag2.getNrMasina()));
+			
 	}
 	
 	@Test
 	/**
-	 * testare adaugare rovinieta
+	 * Testez metoda de adaugareRovinieta, cea care se ocupa de actualizarea listei de roviniete verificate de catre 
+	 * dispozitivul de verificare.
+	 * Aceasta testeaza daca rovinieta exista in evidenta inainte de a o adauga
 	 */
 	void testDateDisponibile3() {
 		
-		Imagine imag2 = new Imagine();
+		System.out.println("/**********************************************************");
+		System.out.println("Testul 3");
+		System.out.println("**********************************************************/");
+
+		DispVerificare disp = new DispVerificare();
+		Rovinieta r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
+		Rovinieta r2 = new Rovinieta("B33CCC", "353sdf", 15002l);
+		Rovinieta r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
+		Evidenta evid = new Evidenta();
+		
+		evid.adaugaRovinieta(r1);
+		evid.adaugaRovinieta(r2);	
+		evid.adaugaRovinieta(r3);
+		disp.setEvidenta(evid);
+		
+		Imagine imag2 = new Imagine("B22CCC");
 		Camera cam2 = new Camera("C2");
 		cam2.capturareImagine(imag2);
-		assertFalse(cam2.identificareNrMasina());
+		cam2.identificareNrMasina();
+		CanalComunicatie can = new CanalComunicatie(cam2);
+		disp.setCanal(can);
+		
+		// metoda care realizeaza adaugarea rovinietei verificate in istoricul de roviniete al dispozitivului de verificare
+		assertTrue(disp.adaugaRovinieta(r2));
+		
 	}
 	
 	
 	@Test
 	/**
-	 *  testare verificare date
+	 *  Testez metoda de verificareDate. Aceasta ilustreaza rezultatul luat de metoda verificareRovinieta 
+	 *  care se ocupa de partea de decizie pentru validarea datelor.
+	 *  Pentru valorile 2 si 3 aceasta intoarce false (rovinieta incorecta / expirata), iar pentru valoare 1, aceasta
+	 *  updateaza lista de roviniete din dispozitiv
 	 */
 	void testDateDisponibile4() {
 		
-		Imagine imag2 = new Imagine("VN22MOL");
+		System.out.println("/**********************************************************");
+		System.out.println("Testul 4");
+		System.out.println("**********************************************************/");
+
+		DispVerificare disp = new DispVerificare();
+		Rovinieta r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
+		Rovinieta r2 = new Rovinieta("B33CCC", "353sdf", 15002l);
+		Rovinieta r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
+		Evidenta evid = new Evidenta();
+		
+		evid.adaugaRovinieta(r1);
+		evid.adaugaRovinieta(r2);	
+		evid.adaugaRovinieta(r3);
+		disp.setEvidenta(evid);
+		
+		Imagine imag2 = new Imagine("B22CCC");
 		Camera cam2 = new Camera("C2");
 		cam2.capturareImagine(imag2);
-		assertTrue(cam2.identificareNrMasina());
+		cam2.identificareNrMasina();
+		CanalComunicatie can = new CanalComunicatie(cam2);
+		disp.setCanal(can);
+		
+		assertTrue( disp.verificareDate(disp.verificareRovinieta("B22CCC", "352sdf")) );
+		
 	}
 	
 	@Test
 	/**
-	 *  test alertare politie
+	 *  Testez metoda alertarePolitie care verifica daca locatia respectiva este valabila si, daca da, trimite o alerta
+	 *  catre centrul respectiv
 	 */
 	void testConnectareDispVCanal1() {
-		Imagine imag2 = new Imagine("VN22MOL");
+		
+		System.out.println("/**********************************************************");
+		System.out.println("Testul 5");
+		System.out.println("**********************************************************/");
+
+		DispVerificare disp = new DispVerificare();
+		Rovinieta r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
+		Rovinieta r2 = new Rovinieta("B33CCC", "353sdf", 15002l);
+		Rovinieta r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
+		Evidenta evid = new Evidenta();
+		
+		evid.adaugaRovinieta(r1);
+		evid.adaugaRovinieta(r2);	
+		evid.adaugaRovinieta(r3);
+		disp.setEvidenta(evid);
+		
+		Imagine imag2 = new Imagine("B22CCC");
 		Camera cam2 = new Camera("C2");
 		cam2.capturareImagine(imag2);
-		CanalComunicatie canCom = new CanalComunicatie(cam2);
-		DispVerificare disp;
-		disp = new DispVerificare(canCom);
+		cam2.identificareNrMasina();
+		CanalComunicatie can = new CanalComunicatie(cam2);
+		disp.setCanal(can);
 		
-		assertTrue(disp.verificareConnectareDispozitiv());
+		assertTrue( disp.alertarePolitie("Bahamas", 20) );
+		
 	}
 	
 	
 	@Test
 	/**
-	 * Test primire semnal -> true daca (departament != null || departament != "")
+	 * Testez metoda primireSemnal care ilustreaza momentul primirii semnalului de alerta de la un dispozitiv de verificare
+	 * si, in cazul in care este ok, directioneaza un politist pentru sanctionare
 	 */
 	void testConnectareDispVCanal2() {
-		//Imagine imag2 = new Imagine("VN22MOL");
+		
+		System.out.println("/**********************************************************");
+		System.out.println("Testul 6");
+		System.out.println("**********************************************************/");
+
+		DispVerificare disp = new DispVerificare();
+		Rovinieta r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
+		Rovinieta r2 = new Rovinieta("B33CCC", "353sdf", 15002l);
+		Rovinieta r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
+		Evidenta evid = new Evidenta();
+		
+		evid.adaugaRovinieta(r1);
+		evid.adaugaRovinieta(r2);	
+		evid.adaugaRovinieta(r3);
+		disp.setEvidenta(evid);
+		
+		Imagine imag2 = new Imagine("B22CCC");
 		Camera cam2 = new Camera("C2");
-		//cam2.capturareImagine(imag2);
-		//CanalComunicatie canCom = new CanalComunicatie();
-		DispVerificare disp;
+		cam2.capturareImagine(imag2);
+		cam2.identificareNrMasina();
+		CanalComunicatie can = new CanalComunicatie(cam2);
+		disp.setCanal(can);
+		Organ_politie op1 = new Organ_politie();
 		
-		//In cazul asta  nu avem canal de comunicatie
-		disp = new DispVerificare();
-		
-		assertFalse(disp.verificareConnectareDispozitiv());
+		assertTrue( op1.primireSemnal("Bahamas") );
 	}
 
 }
