@@ -10,11 +10,19 @@ public class Aplicatie {
 
 		Proprietar_masina propMas2 = new Proprietar_masina("Marcel Dan", "19205278913514", "Bd. Ion Mihalache Nr. 14");
 		Evidenta evidenta1 = new Evidenta();
-		Rovinieta rov = new Rovinieta("B20YBC", "JK201AB");
-		rov.afisareDate();
 		
 		
-		/*
+		propMas2.introducereDate("B20YBC", "JK201AB", evidenta1);
+
+		//evidenta1.afiseazaRoviniete();
+		try {
+			evidenta1.schimbaData(new SimpleDateFormat("dd/MM/yyyy").parse("15/12/2018"), 0);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		evidenta1.afiseazaRoviniete();
+		propMas2.verificareRovinieta("B20YBC", "JK201AB", evidenta1);
+	/*
 		Organ_politie oPolitie1;
 		Proprietar_masina propMas1;
 		Camera cam1;

@@ -99,12 +99,12 @@ public class Proprietar_masina extends Date_Rovinieta {
 	 * Altfel, se seteaza datele introduse
 	 * @throws ParseException 
 	 */
-	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta) throws ParseException {
+	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta){
 		if(rovinieta == null && evidenta != null) {
 			if(evidenta.rovinietaExista(serieSasiu) == false) 
 			{
 				Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
-				temp.setData(new Date());
+		
 				evidenta.adaugaRovinieta(temp);
 				
 				this.rovinieta = temp;
@@ -126,14 +126,11 @@ public class Proprietar_masina extends Date_Rovinieta {
 	@SuppressWarnings("deprecation")
 	public boolean verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) 
 	{
-		Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
-		Date date;
-		try {
-			date = new Date();
-			temp.setData(date);
+		Rovinieta temp = evidenta.getUltimaRovinieta();
+		if(temp == null) {
+			System.out.println("Rovinieta nu exista in evidenta si a fost creata!");
+			temp = new Rovinieta(nrInmatriculare, serieSasiu);
 			evidenta.adaugaRovinieta(temp);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 				
 		if(Calendar.getInstance().get(Calendar.YEAR) == temp.getData().getYear())
@@ -142,19 +139,27 @@ public class Proprietar_masina extends Date_Rovinieta {
 		else temp.setIsExpired(true);
 		
 		if(evidenta.rovinietaExista(serieSasiu)) {
-			if(temp.getSerieSasiu() == serieSasiu)
-				if(!evidenta.rovinietaExpirata(serieSasiu))
-				{
-					System.out.println("Rovinieta exista si nu a expirat!");
-					return true;
+			if(temp.getSerieSasiu().equals(serieSasiu)) {
+				if(temp.getNrInmatriculare().equals(nrInmatriculare)) {
+					if(!evidenta.rovinietaExpirata(serieSasiu)) {
+						System.out.println("Rovinieta este in termen. Circulati cu atentie!");
+						return true;
+					}
+					else {
+						System.out.println("Rovinieta expirata! Un echipaj de politie apropiat va fi alertat!");
+						return false;
+					}
 				}
-		}
-		
-		else 
-		{
-			System.out.println("Rovinieta expirata! Un echipaj de politie apropiat va fi alertat!");
-			return false;
-		}
+				else
+				{
+					System.out.println("Numarul de inmatriculare nu a fost introdus cum trebuie!");
+				}
+			}
+			else {
+				System.out.println("Seria sasiului nu a fost introdusa cum trebuie!");
+				return false;
+			}
+		}	
 		return false;
 	}
 };

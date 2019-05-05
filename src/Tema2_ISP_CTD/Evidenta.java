@@ -47,6 +47,11 @@ public class Evidenta {
 		return nrRovinieta;
 	}
 	
+	/**
+	 * Posibilitatea schimbarii datei unei Roviniete
+	 * @param date - data cu care se va schimba data originala
+	 * @param i - pozitia ocupata de Rovinieta in vectorul de roviniete
+	 */
 	public void schimbaData(Date date, int i)
 	{
 		if(rovinieta != null)
@@ -68,14 +73,13 @@ public class Evidenta {
 	}
 	
 	/**
-	 * 
+	 * Posibilitatea adaugarii de rovinieta in vectorul de roviniete
 	 * 
 	 */
 	public void adaugaRovinieta(Rovinieta rovinieta) {
 		
 		if(nrRovinieta > 1) {
-			//nrRov =2
-			nrRovinieta = nrRovinieta +1; //nrRov = 3
+			nrRovinieta = nrRovinieta +1; 
 			Rovinieta temp[] = new Rovinieta[nrRovinieta]; 
 			
 			for(int i=0; i<nrRovinieta-1; ++i)
@@ -90,15 +94,15 @@ public class Evidenta {
 		} 
 		else if(nrRovinieta == 1)
 		{
-			nrRovinieta = nrRovinieta +1;
-			Rovinieta temp = this.rovinieta[nrRovinieta-2];
+			nrRovinieta += 1;
+			Rovinieta temp = this.rovinieta[nrRovinieta - 2];
+			this.rovinieta = new Rovinieta[nrRovinieta]; // marit spatiul la 2			
 			
-			this.rovinieta = new Rovinieta[nrRovinieta]; // marit spatiul la 2
 			this.rovinieta[nrRovinieta - 2] = temp;      // pe 0 punem temp
 			this.rovinieta[nrRovinieta - 1] = rovinieta; // pe 1 punem rovinieta pe care o vrem
 		} 
-		else {
-			nrRovinieta = nrRovinieta +1;
+		else if(nrRovinieta == 0) {
+			nrRovinieta = nrRovinieta + 1;
 			this.rovinieta = new Rovinieta[nrRovinieta]; //aloc 1 spatiu
 			this.rovinieta[nrRovinieta-1] = rovinieta;   // pun pe pozitia 1-1=0 pe rovinieta
 		}
@@ -147,13 +151,9 @@ public class Evidenta {
 	{
 		if(nrRovinieta != 0 && rovinieta != null) 
 		{
-			this.afiseazaRoviniete();
-			for(int i=0; i<nrRovinieta; ++i) {
-				if( serieSasiu.equals( rovinieta[i].getSerieSasiu() ) ) {
-					System.out.println("rovinietaExista() -> Rovinieta are serieSasiu la fel");
+			for(int i = 0; i < nrRovinieta; ++i)
+				if( serieSasiu.equals( rovinieta[i].getSerieSasiu() ) )
 					return true;
-				}
-			}
 		}
 		return false;
 	}
@@ -161,7 +161,6 @@ public class Evidenta {
 	public boolean rovinietaExpirata(String serieSasiu) {
 		for(int i=0; i<nrRovinieta; ++i) {
 			if( serieSasiu.equals( rovinieta[i].getSerieSasiu() ) ) {
-				System.out.println("rovinietaExpirata() -> Rovinieta are serieSasiu la fel");
 				if(rovinieta[i].getIsExpired()) return true;
 			}
 		}
@@ -179,7 +178,7 @@ public class Evidenta {
 	public Rovinieta getUltimaRovinieta() 
 	{
 		if(rovinieta != null)
-			return rovinieta[nrRovinieta - 1];
+			return rovinieta[rovinieta.length - 1];
 		return null;
 	}
 };

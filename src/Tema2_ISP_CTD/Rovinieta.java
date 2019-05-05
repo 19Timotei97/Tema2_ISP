@@ -43,6 +43,7 @@ public class Rovinieta {
 	{
 		nrInmatriculare = nrInmat;
 		this.serieSasiu = serieSasiu;
+		Rovinieta.idRovinieta += 1;
 		setData(new Date());
 	}
 	
@@ -51,6 +52,7 @@ public class Rovinieta {
 		this.setNrInmatriculare(nrInmat);
 		this.setSerieSasiu(serieSasius);
 		this.setIdRovinieta(idRov);
+		setData(new Date());
 	}
 	
 	/**
@@ -58,7 +60,8 @@ public class Rovinieta {
 	 */
 	public Rovinieta(Rovinieta rov)
 	{
-		this(rov.nrInmatriculare, rov.serieSasiu, rov.idRovinieta);
+		this(rov.nrInmatriculare, rov.serieSasiu, rov.getIdRovinieta());
+		this.setData(rov.getData());
 	}
 	
 	/**
