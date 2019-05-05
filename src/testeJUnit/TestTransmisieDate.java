@@ -11,6 +11,10 @@ import Tema2_ISP_CTD.Imagine;
 
 class TestTransmisieDate {
 	
+	/**
+	 * Dan Moldovan 334AA Transmitere date
+	 */
+	
 	@Test
 	/**
 	 * Testez Imagine cu continut gol #1
