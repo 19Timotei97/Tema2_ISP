@@ -86,7 +86,7 @@ public class Rovinieta {
 	}
 
 	public void setIdRovinieta(long idRovinieta) {
-		this.idRovinieta = idRovinieta;
+		Rovinieta.idRovinieta = idRovinieta;
 	}
 
 	public boolean getIsExpired() {
@@ -110,9 +110,10 @@ public class Rovinieta {
 	 */
 	public void afisareDate() 
 	{
-		System.out.println("Rovinieta ID: " + this.idRovinieta);
+		System.out.println("Rovinieta ID: " + Rovinieta.idRovinieta);
 		System.out.println("Numar inmatriculare: " + this.nrInmatriculare);
 		System.out.println("Serie sasiu: " + this.serieSasiu);
+		System.out.println("Data: " + this.data);
 		System.out.print("Expirata: ");
 		if(getIsExpired())
 			System.out.println("Da");

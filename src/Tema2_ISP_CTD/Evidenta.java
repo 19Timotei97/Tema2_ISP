@@ -161,10 +161,10 @@ public class Evidenta {
 		return "";
 	}
 
-	public Rovinieta getRovinieta(int i) 
+	public Rovinieta getUltimaRovinieta() 
 	{
-		if(rovinieta != null && i > 0 && i < rovinieta.length)
-			return rovinieta[i];
+		if(rovinieta != null)
+			return rovinieta[nrRovinieta - 1];
 		return null;
 	}
 };

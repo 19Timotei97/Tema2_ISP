@@ -4,6 +4,7 @@
 
 package Tema2_ISP_CTD;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -98,11 +99,14 @@ public class Proprietar_masina extends Date_Rovinieta {
 	 * Daca sasiul scris in rovinieta este acelasi cu cel introdus si rovinietea nu este expirata, se va returna true.
 	 * Daca sasiul scris in rovinieta este acelasi cu cel introdus, rovinieta nu este expirata
 	 * Altfel, se seteaza datele introduse
+	 * @throws ParseException 
 	 */
-	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta) {
+	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta) throws ParseException {
 		if(rovinieta == null) {
-			if(evidenta.rovinietaExista(serieSasiu) == false) {
-				Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu, 99);
+			if(evidenta.rovinietaExista(serieSasiu) == false) 
+			{
+				Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
+				temp.setData(new Date());
 				evidenta.adaugaRovinieta(temp);
 				
 				this.rovinieta = temp;
@@ -117,7 +121,7 @@ public class Proprietar_masina extends Date_Rovinieta {
 		return false;
 	}
 	
-	/*
+	/**
 	 * Metoda prin care un proprietar isi poate verifica Rovinieta. Se introduc nr de inmatriculare, seria sasiului si se mai accepta si un parametru
 	 * de tip evidenta, in care se va cauta rovinieta.
 	 */

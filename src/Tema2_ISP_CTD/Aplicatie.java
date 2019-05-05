@@ -1,8 +1,22 @@
 package Tema2_ISP_CTD;
 
+import java.text.ParseException;
+
 public class Aplicatie {
 
 	public static void main(String[] args) {
+
+		Proprietar_masina propMas1 = new Proprietar_masina("Gigel Ionel", "1860316224495", "Str Caramizilor Nr. 23");
+		Evidenta evidenta = new Evidenta();
+	
+		try {
+			propMas1.introducereDate("B18ECK", "ZF893FQ", evidenta);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		evidenta.afiseazaRoviniete();
+		/*
 		Organ_politie oPolitie1;
 		Proprietar_masina propMas1;
 		Camera cam1;
@@ -66,7 +80,7 @@ public class Aplicatie {
 		oPolitie1.verificareRovinieta("nasdfkjn", "afadsfsdf", evid);
 		s1 = new Sanctiune("ceva","" , "Bd Dimitrie Cantemir, Nr. 5");
 		System.out.println(s1.getLoc());
-		
+		*/
 	}
 
 }
