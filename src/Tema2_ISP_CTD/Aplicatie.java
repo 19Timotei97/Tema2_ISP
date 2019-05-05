@@ -1,29 +1,13 @@
 package Tema2_ISP_CTD;
 
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
+/**
+ *	Clasa Aplicatie a fost creata pentru a teste implementarea metodelor
+ * ce sunt folosite intr-un scenariu clasic de utilizare
+ */
 public class Aplicatie {
 
 	public static void main(String[] args) {
 
-		Proprietar_masina propMas2 = new Proprietar_masina("Marcel Dan", "19205278913514", "Bd. Ion Mihalache Nr. 14");
-		Evidenta evidenta1 = new Evidenta();
-		
-		
-		propMas2.introducereDate("B20YBC", "JK201AB", evidenta1);
-
-		//evidenta1.afiseazaRoviniete();
-		try {
-			evidenta1.schimbaData(new SimpleDateFormat("dd/MM/yyyy").parse("15/12/2018"), 0);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		evidenta1.afiseazaRoviniete();
-		propMas2.verificareRovinieta("B20YBC", "JK201AB", evidenta1);
-	/*
 		Organ_politie oPolitie1;
 		Proprietar_masina propMas1;
 		Camera cam1;
@@ -35,9 +19,9 @@ public class Aplicatie {
 		
 		disp = new DispVerificare();
 		oPolitie1 = new Organ_politie("Gigel", disp);
-		r1 = new Rovinieta("B22CCC", "352sdf", 1);
-		r2 = new Rovinieta("B33CCC", "353sdf", 2);
-		r3 = new Rovinieta("B44CCC", "354sdf", 3);
+		r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
+		r2 = new Rovinieta("B33CCC", "353sdf", 15002l);
+		r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
 		
 		evid = new Evidenta();
 		
@@ -81,13 +65,12 @@ public class Aplicatie {
 		cam1= new Camera("C2");
 		cam1.capturareImagine(imag1);
 		cam1.identificareNrMasina();
-		System.out.println(cam1.transmitereDate()); 
+		System.out.println(cam1.getNrInmatriculare()); 
 		System.out.println("\n\n\n");
 		
 		oPolitie1.verificareRovinieta("nasdfkjn", "afadsfsdf", evid);
 		s1 = new Sanctiune("ceva","" , "Bd Dimitrie Cantemir, Nr. 5");
 		System.out.println(s1.getLoc());
-		*/
 	}
 
 }
