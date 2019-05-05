@@ -3,11 +3,11 @@ package Tema2_ISP_CTD;
 public class Imagine {
 	private String nrMasina;
 
-    Imagine(String nrInmatriculare){
+    public Imagine(String nrInmatriculare){
         this.nrMasina = nrInmatriculare;
 
     }
-    Imagine(){
+    public Imagine(){
         nrMasina = null;
     }
 

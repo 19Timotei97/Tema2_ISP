@@ -42,10 +42,6 @@ class TestVerificareRovinieta {
 		propMas2.introducereDate("B20YBC", "JK201AB", evidenta);
 		System.out.println("====================================================");
 		Rovinieta temp2 = evidenta.getUltimaRovinieta();
-		
-		Date date = temp2.getData();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
 				
 		temp2.afisareDate();
 		assertTrue(propMas2.verificareRovinieta("B20YBC", "JK201AB", evidenta));

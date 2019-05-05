@@ -28,7 +28,7 @@ public class Camera {
 	private Imagine img;
 	
 	
-	Camera(String idCamera){
+	public Camera(String idCamera){
 		this.idCamera = idCamera;
 		StareCam = StariCamera.Pornita;
 		
@@ -55,14 +55,7 @@ public class Camera {
 		StareCam = stareCam;
 	}
 	
-	
-	/**
-	 * transmitereDate = getter pt nrInmatriculare
-	 * 
-	 */
-	
-	public String transmitereDate() 
-	{
+	public String getNrInmatriculare() {
 		StareCam = StariCamera.DateTransmise;
 		return nrInmatriculare;
 	}
@@ -72,12 +65,15 @@ public class Camera {
 	 * 
 	 */
 	public boolean identificareNrMasina() {
-		if(img.getNrMasina() != null) {
-			this.nrInmatriculare = img.getNrMasina();
-			StareCam = StariCamera.NrIdentificat;
-			return true;
-		}
-		return false;
+	String nrMasina = img.getNrMasina();
+	if(nrMasina != null && !nrMasina.equals("") && !nrMasina.equals(" ")) {
+		this.nrInmatriculare = nrMasina;
+		StareCam = StariCamera.NrIdentificat;
+		System.out.println("Cofirmare existenta date!");
+		return true;
+	}
+	System.out.println("Nu sunt date disponibile!");
+	return false;
 	}
 
 	/**

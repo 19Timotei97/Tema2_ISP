@@ -18,12 +18,25 @@ public class DispVerificare extends Date_Rovinieta {
 	 */
 	private Rovinieta[] rovinieta;
 	
+	/**
+	 * Camp prin care disp de verificare comunica cu camera
+	 */
+	CanalComunicatie canal;
 	
+	/**
+	 * In acest string se va pastra numarul de inmatriculare returnat de canal
+	 */
+	String date;
 	
 	public DispVerificare() 
 	{
 		nrRoviniete = 0;
 		rovinieta = null;
+	}
+	
+	public DispVerificare(CanalComunicatie can)
+	{
+		this.canal = can;
 	}
 	
 	public DispVerificare(Rovinieta[] roviniete, int lungime) {
@@ -163,4 +176,30 @@ public class DispVerificare extends Date_Rovinieta {
 		alertarePolitie(temp);
 		return false;
 	}
+	
+	/**
+	 * Verific daca dispozitivul s a conectat la canalul de comunicatie
+	 */
+	public boolean verificareConnectareDispozitiv() {
+		if(this.canal != null ) {
+			System.out.println("Conectare reusita");
+			return true;
+		}
+		System.out.println("Eroare de conectare a Dispozitivului de Verificare la Canal");
+		return false;
+	}
+	
+	/**
+	 * Se salveaza in Stringul date informatiile de pe canalul de comunicatie
+	 */
+	public boolean acceptareDate () {
+		if(this.canal != null) {
+			this.date = canal.transmitereDate();
+			System.out.println(this.date);
+			return true;
+		}
+		return false;	
+	}
+	
+	
 };
