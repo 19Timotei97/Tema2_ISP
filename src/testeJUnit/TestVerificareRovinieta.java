@@ -29,6 +29,7 @@ class TestVerificareRovinieta {
 		
 		propMas1.introducereDate("B18ECK", "ZF893FQ", evidenta);
 		
+		evidenta.afiseazaRoviniete();
 		evidenta.schimbaData(new SimpleDateFormat("dd/MM/yyyy").parse("20/10/2018"), 0);
 		Rovinieta temp1 = evidenta.getUltimaRovinieta();
 		temp1.afisareDate();

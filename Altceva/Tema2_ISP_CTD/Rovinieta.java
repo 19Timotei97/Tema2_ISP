@@ -36,7 +36,7 @@ public class Rovinieta {
 		isExpired = false;
 		nrInmatriculare = "";
 		serieSasiu = "";
-		Rovinieta.id += 1;
+		id += 1;
 	}
 	
 	/**
@@ -44,11 +44,11 @@ public class Rovinieta {
 	 */
 	public Rovinieta(String nrInmat, String serieSasiu)
 	{
-		idRovinieta = Rovinieta.id;
+		idRovinieta = id;
 		nrInmatriculare = nrInmat;
 		this.serieSasiu = serieSasiu;
 		setData(new Date());
-		Rovinieta.id += 1;
+		id += 1;
 	}
 	
 	public Rovinieta(String nrInmat, String serieSasius, long idRov)
@@ -56,7 +56,6 @@ public class Rovinieta {
 		this.setNrInmatriculare(nrInmat);
 		this.setSerieSasiu(serieSasius);
 		this.setIdRovinieta(idRov);
-		setData(new Date());
 	}
 	
 	/**
@@ -64,8 +63,7 @@ public class Rovinieta {
 	 */
 	public Rovinieta(Rovinieta rov)
 	{
-		this(rov.nrInmatriculare, rov.serieSasiu, rov.getIdRovinieta());
-		this.setData(rov.getData());
+		this(rov.nrInmatriculare, rov.serieSasiu, rov.idRovinieta);
 	}
 	
 	/**
@@ -80,24 +78,9 @@ public class Rovinieta {
 		return this.data;
 	}
 	
-	/**
-	 * Modalitate de setare a datei Rovinietei
-	 * @param data - data noua a Rovinietei
-	 */
 	public void setData(Date data)
 	{
 		this.data = data;
-		
-		Date date = getData();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		
-		if(Calendar.getInstance().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) {
-			if(((Calendar.getInstance().get(Calendar.MONTH)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6)
-				this.setIsExpired(false);
-			else this.setIsExpired(true);
-		}
-		else this.setIsExpired(true);
 	}
 
 	public void setNrInmatriculare(String nrInmatriculare) {
@@ -138,7 +121,7 @@ public class Rovinieta {
 		System.out.println("Serie sasiu: " + this.serieSasiu);
 		System.out.println("Data: " + this.data);
 		System.out.print("Expirata: ");
-		if(getIsExpired() == true)
+		if(getIsExpired())
 			System.out.println("Da");
 		else System.out.println("Nu");
 	}

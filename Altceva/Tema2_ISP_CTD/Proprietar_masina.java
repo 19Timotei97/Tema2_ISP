@@ -22,7 +22,6 @@ public class Proprietar_masina extends Date_Rovinieta {
 
 	private Rovinieta rovinieta = null;
 
-	
 	/**
 	 * Constructor ce primeste datele unui proprietar
 	 */
@@ -30,6 +29,7 @@ public class Proprietar_masina extends Date_Rovinieta {
 		this.nume = nume;
 		this.cnp = cnp;
 		this.adresa = adresa;
+		rovinieta = new Rovinieta();
 	}
 	
 	/**
@@ -77,6 +77,7 @@ public class Proprietar_masina extends Date_Rovinieta {
 	public void setRovinieta(Rovinieta rovinieta) {
 		this.rovinieta = rovinieta;
 	}
+
 	
 	/**
 	 * Metoda prin care se afiseaza datele proprietarului precum si ale rovinietei sale
@@ -100,21 +101,16 @@ public class Proprietar_masina extends Date_Rovinieta {
 	 * Altfel, se seteaza datele introduse
 	 * @throws ParseException 
 	 */
-	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta){
+	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta) {
 		if(rovinieta == null && evidenta != null) {
-			if(nrInmatriculare.length() > 0 && nrInmatriculare.length() <= 8 && serieSasiu.length() > 0 && serieSasiu.length() <= 7) {
-				if(evidenta.rovinietaExista(serieSasiu, "sasiu") == false) 
-				{
-					Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
-		
-					evidenta.adaugaRovinieta(temp);
+			if(evidenta.rovinietaExista(serieSasiu, "sasiu") == false) 
+			{
+				Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
+				temp.setData(new Date());
+				evidenta.adaugaRovinieta(temp);
 				
-					this.rovinieta = temp;
-				}
+				this.rovinieta = temp;
 			}
-			else if(nrInmatriculare.length() > 8) System.out.println("Nu este corect numarul de inmatriculare!");
-			else if(serieSasiu.length() > 7) System.out.println("Nu este corecta seria sasiului!");
-			else System.out.println("Va rugam sa reintroduceti datele!");
 		} else if( this.rovinieta.getSerieSasiu().equals(serieSasiu) == true && evidenta.rovinietaExpirata(serieSasiu) == false) return true;
 		else if(this.rovinieta.getSerieSasiu().equals(serieSasiu) == true) this.rovinieta.setIsExpired(false);
 		else {
@@ -122,55 +118,45 @@ public class Proprietar_masina extends Date_Rovinieta {
 			this.rovinieta.setSerieSasiu(serieSasiu);
 			this.rovinieta.setIsExpired(false);
 		}
-return false;
+		return false;
 	}
 	
 	/**
 	 * Metoda prin care un proprietar isi poate verifica Rovinieta. Se introduc nr de inmatriculare, seria sasiului si se mai accepta si un parametru
 	 * de tip evidenta, in care se va cauta rovinieta.
 	 */
+	@SuppressWarnings("deprecation")
 	public boolean verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) 
 	{
-		Rovinieta temp = evidenta.getUltimaRovinieta();
-		if(temp == null) {
-			System.out.println("Rovinieta nu exista in evidenta si a fost creata!");
-			temp = new Rovinieta(nrInmatriculare, serieSasiu);
+		Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
+		Date date;
+		try {
+			date = new Date();
+			temp.setData(date);
 			evidenta.adaugaRovinieta(temp);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		Date date = temp.getData();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
 				
-		if(Calendar.getInstance().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) {
-			if(((Calendar.getInstance().get(Calendar.MONTH)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6)
+		if(Calendar.getInstance().get(Calendar.YEAR) == temp.getData().getYear())
+			if(((Calendar.getInstance().get(Calendar.MAY)) + 1) - (temp.getData().getMonth() + 1) < 6)
 				temp.setIsExpired(false);
-			else temp.setIsExpired(true);
-		}
 		else temp.setIsExpired(true);
 		
 		if(evidenta.rovinietaExista(serieSasiu, "sasiu")) {
-			if(temp.getSerieSasiu().equals(serieSasiu)) {
-				if(temp.getNrInmatriculare().equals(nrInmatriculare)) {
-					if(!evidenta.rovinietaExpirata(serieSasiu)) {
-						System.out.println("Rovinieta este in termen. Circulati cu atentie!");
-						return true;
-					}
-					else {
-						System.out.println("Rovinieta expirata! Aveti grija sa o refaceti cat de curand!");
-						return false;
-					}
-				}
-				else
+			if(temp.getSerieSasiu() == serieSasiu)
+				if(!evidenta.rovinietaExpirata(serieSasiu))
 				{
-					System.out.println("Numarul de inmatriculare nu a fost introdus cum trebuie!");
+					System.out.println("Rovinieta exista si nu a expirat!");
+					return true;
 				}
-			}
-			else {
-				System.out.println("Seria sasiului nu a fost introdusa cum trebuie!");
-				return false;
-			}
-		}	
+		}
+		
+		else 
+		{
+			System.out.println("Rovinieta expirata! Un echipaj de politie apropiat va fi alertat!");
+			return false;
+		}
 		return false;
 	}
 };

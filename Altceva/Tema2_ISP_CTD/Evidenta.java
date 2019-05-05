@@ -22,8 +22,6 @@ public class Evidenta {
 	 */
 	private int nrRovinieta =0;
 
-	
-	
 	/**
 	 * Constructor de baza
 	 */
@@ -44,6 +42,7 @@ public class Evidenta {
 	public Evidenta(Evidenta evid){
 		this(evid.getRovinieta(), evid.getNrRoviniete());
 	}
+	
 	
 	/**
 	 * Getteri si setteri pentru fiecare atribut in parte
@@ -80,24 +79,14 @@ public class Evidenta {
 		return nrRovinieta;
 	}
 	
-	/**
-	 * Posibilitatea schimbarii datei unei Roviniete
-	 * @param date - data cu care se va schimba data originala
-	 * @param i - pozitia ocupata de Rovinieta in vectorul de roviniete
-	 */
 	public void schimbaData(Date date, int i)
 	{
 		if(rovinieta != null)
 			rovinieta[i].setData(date);
 		
-		Date data = rovinieta[i].getData();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(data);
-		
-		if(Calendar.getInstance().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) {
-			if(((Calendar.getInstance().get(Calendar.MAY)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6)
+		if(new Date().getYear() == rovinieta[i].getData().getYear()) {
+			if(new Date().getMonth() - rovinieta[i].getData().getMonth() < 6)
 				rovinieta[i].setIsExpired(false);
-			else rovinieta[i].setIsExpired(true);
 		}
 		else rovinieta[i].setIsExpired(true);
 	}
@@ -120,6 +109,7 @@ public class Evidenta {
 	 */
 	public boolean rovinietaExista(String str, String optiune) 
 	{
+		
 		if(optiune.equals("sasiu")) {
 			if(nrRovinieta != 0) {
 				if(nrRovinieta != 0 && rovinieta != null) 
@@ -183,8 +173,9 @@ public class Evidenta {
 		return false;
 	}
 	
+	
 	/**
-	 * Posibilitatea adaugarii de rovinieta in vectorul de roviniete
+	 * 
 	 * 
 	 */
 	public void adaugaRovinieta(Rovinieta rovinieta) {
@@ -213,11 +204,11 @@ public class Evidenta {
 			this.rovinieta[nrRovinieta - 2] = temp;      // pe 0 punem temp
 			this.rovinieta[nrRovinieta - 1] = rovinieta; // pe 1 punem rovinieta pe care o vrem
 		} 
-		else if(nrRovinieta == 0){
+		else {
 			nrRovinieta = nrRovinieta +1;
 			this.rovinieta = new Rovinieta[nrRovinieta]; //aloc 1 spatiu
 			this.rovinieta[nrRovinieta-1] = rovinieta;   // pun pe pozitia 1-1=0 pe rovinieta
-		} 
+		}
 		
 	}
 	
@@ -255,6 +246,7 @@ public class Evidenta {
 		else return false;
 	}
 	
+	
 	public String getNrInmatriculare(String serieSasiu) {
 		for(int i=0; i<nrRovinieta; ++i) {
 			if( serieSasiu.equals( rovinieta[i].getSerieSasiu() ) )
@@ -274,7 +266,7 @@ public class Evidenta {
 	public Rovinieta getUltimaRovinieta() 
 	{
 		if(rovinieta != null)
-			return rovinieta[rovinieta.length - 1];
+			return rovinieta[nrRovinieta - 1];
 		return null;
 	}
 };

@@ -1,16 +1,20 @@
 package Tema2_ISP_CTD;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-/**
- *	Clasa Aplicatie a fost creata pentru a teste implementarea metodelor
- * ce sunt folosite intr-un scenariu clasic de utilizare
- */
 public class Aplicatie {
 
 	public static void main(String[] args) {
 
+		/*Proprietar_masina propMas2 = new Proprietar_masina("Marcel Dan", "19205278913514", "Bd. Ion Mihalache Nr. 14");
+		Evidenta evidenta1 = new Evidenta();
+		Rovinieta rov = new Rovinieta("B20YBC", "JK201AB");
+		rov.afisareDate();
+		*/
+		
+		
 		Organ_politie oPolitie1;
 		Proprietar_masina propMas1;
 		Camera cam1;
@@ -22,41 +26,32 @@ public class Aplicatie {
 		
 		disp = new DispVerificare();
 		oPolitie1 = new Organ_politie("Gigel", disp);
-		r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
-		r2 = new Rovinieta("B33CCC", "353sdf", 15002l);
-		r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
+		r1 = new Rovinieta("B22CCC", "352sdf");
+		r2 = new Rovinieta("B33CCC", "353sdf");
+		r3 = new Rovinieta("B44CCC", "354sdf");
 		
 		evid = new Evidenta();
 		
 		evid.adaugaRovinieta(r1);
-		evid.adaugaRovinieta(r2);	
+		evid.adaugaRovinieta(r2);
 		evid.adaugaRovinieta(r3);
-		
-		System.out.println("Evidenta afiseaza rovinietele");
-		evid.afiseazaRoviniete();
-		System.out.println("\n\n");
-		
+		//evid.afiseazaRoviniete();
 		
 		disp.adaugaRovinieta(r1);
 		disp.adaugaRovinieta(r2);
 		disp.adaugaRovinieta(r3);
-		System.out.println("Dispozitivul afiseaza rovinietele");
-		disp.listaRoviniete();
-		System.out.println("\n\n");
-		disp.scoateRovinieta(r2);
-		System.out.println("Dispozitivul afiseaza rovinietele");
-		disp.listaRoviniete();
-		System.out.println("\n\n");
 		
-		try {
-			evid.schimbaData(new SimpleDateFormat("dd/MM/yyyy").parse("20/10/2018"), 0);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		r1.afisareDate();
+		disp.setEvidenta(evid);
+		//disp.getEvidenta().afiseazaRoviniete();
+		//System.out.println("\n\n");
+		//disp.listaRoviniete();
+		//System.out.println("\n\n");
+		if(disp.preluareDateRovinieta("B33CCC"));
+		//System.out.println(evid.getSerieSasiu("B33CCC"));
 		
 		
+		
+		System.out.println("Dispozitivul politistului afiseaza rovinietele");
 		oPolitie1.getDispVerif().listaRoviniete();
 		oPolitie1.setDispVerif(disp);
 		oPolitie1.getDispVerif().listaRoviniete();
@@ -69,7 +64,7 @@ public class Aplicatie {
 		//propMas1.getRovinieta().afisareDate();
 		
 		System.out.println("Verificare clasa Imagine");
-		imag1 = new Imagine("Imag1");
+		imag1 = new Imagine("B33CCC");
 		System.out.println(imag1.getNrMasina());
 		System.out.println("\n\n\n");
 		
@@ -77,12 +72,14 @@ public class Aplicatie {
 		cam1= new Camera("C2");
 		cam1.capturareImagine(imag1);
 		cam1.identificareNrMasina();
-		System.out.println(cam1.getNrInmatriculare()); 
-		System.out.println("\n\n\n");
+		System.out.println(cam1.transmitereDate(disp)); 
+		//System.out.println("\n\n\n");
 		
+		/*
 		oPolitie1.verificareRovinieta("nasdfkjn", "afadsfsdf");
 		s1 = new Sanctiune("ceva","" , "Bd Dimitrie Cantemir, Nr. 5");
 		System.out.println(s1.getLoc());
+		*/
 	}
 
 }
