@@ -101,14 +101,19 @@ public class Proprietar_masina extends Date_Rovinieta {
 	 */
 	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta){
 		if(rovinieta == null && evidenta != null) {
-			if(evidenta.rovinietaExista(serieSasiu) == false) 
-			{
-				Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
+			if(nrInmatriculare.length() < 8 && serieSasiu.length() < 7) {
+				if(evidenta.rovinietaExista(serieSasiu) == false) 
+				{
+					Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
 		
-				evidenta.adaugaRovinieta(temp);
+					evidenta.adaugaRovinieta(temp);
 				
-				this.rovinieta = temp;
+					this.rovinieta = temp;
+				}
 			}
+			else if(nrInmatriculare.length() > 8) System.out.println("Nu este corect numarul de inmatriculare!");
+			else if(serieSasiu.length() > 7) System.out.println("Nu este corecta seria sasiului!");
+			else System.out.println("Va rugam sa reintroduceti datele!");
 		} else if( this.rovinieta.getSerieSasiu().equals(serieSasiu) == true && evidenta.rovinietaExpirata(serieSasiu) == false) return true;
 		else if(this.rovinieta.getSerieSasiu().equals(serieSasiu) == true) this.rovinieta.setIsExpired(false);
 		else {

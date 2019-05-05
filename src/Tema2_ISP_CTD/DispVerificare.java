@@ -20,9 +20,10 @@ public class DispVerificare extends Date_Rovinieta {
 	
 	
 	
-	public DispVerificare() {
-		nrRoviniete =0;
-		rovinieta =null;
+	public DispVerificare() 
+	{
+		nrRoviniete = 0;
+		rovinieta = null;
 	}
 	
 	public DispVerificare(Rovinieta[] roviniete, int lungime) {
