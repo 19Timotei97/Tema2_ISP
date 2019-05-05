@@ -17,7 +17,7 @@ public class Rovinieta {
 	
 	private static long idRovinieta = 159001l;
 
-	private boolean isExpired;
+	private boolean isExpired = false;
 
 	private String nrInmatriculare;
 	
@@ -76,9 +76,24 @@ public class Rovinieta {
 		return this.data;
 	}
 	
+	/**
+	 * Modalitate de setare a datei Rovinietei
+	 * @param data - data noua a Rovinietei
+	 */
 	public void setData(Date data)
 	{
 		this.data = data;
+		
+		Date date = getData();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		
+		if(Calendar.getInstance().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) {
+			if(((Calendar.getInstance().get(Calendar.MONTH)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6)
+				this.setIsExpired(false);
+			else this.setIsExpired(true);
+		}
+		else this.setIsExpired(true);
 	}
 
 	public void setNrInmatriculare(String nrInmatriculare) {
@@ -119,7 +134,7 @@ public class Rovinieta {
 		System.out.println("Serie sasiu: " + this.serieSasiu);
 		System.out.println("Data: " + this.data);
 		System.out.print("Expirata: ");
-		if(getIsExpired())
+		if(getIsExpired() == true)
 			System.out.println("Da");
 		else System.out.println("Nu");
 	}

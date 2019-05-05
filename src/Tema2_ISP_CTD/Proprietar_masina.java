@@ -101,7 +101,7 @@ public class Proprietar_masina extends Date_Rovinieta {
 	 */
 	public boolean introducereDate(String nrInmatriculare, String serieSasiu, Evidenta evidenta){
 		if(rovinieta == null && evidenta != null) {
-			if(nrInmatriculare.length() < 8 && serieSasiu.length() < 7) {
+			if(nrInmatriculare.length() > 0 && nrInmatriculare.length() <= 8 && serieSasiu.length() > 0 && serieSasiu.length() <= 7) {
 				if(evidenta.rovinietaExista(serieSasiu) == false) 
 				{
 					Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
@@ -128,7 +128,6 @@ public class Proprietar_masina extends Date_Rovinieta {
 	 * Metoda prin care un proprietar isi poate verifica Rovinieta. Se introduc nr de inmatriculare, seria sasiului si se mai accepta si un parametru
 	 * de tip evidenta, in care se va cauta rovinieta.
 	 */
-	@SuppressWarnings("deprecation")
 	public boolean verificareRovinieta(String nrInmatriculare, String serieSasiu, Evidenta evidenta) 
 	{
 		Rovinieta temp = evidenta.getUltimaRovinieta();
@@ -137,10 +136,16 @@ public class Proprietar_masina extends Date_Rovinieta {
 			temp = new Rovinieta(nrInmatriculare, serieSasiu);
 			evidenta.adaugaRovinieta(temp);
 		}
+		
+		Date date = temp.getData();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
 				
-		if(Calendar.getInstance().get(Calendar.YEAR) == temp.getData().getYear())
-			if(((Calendar.getInstance().get(Calendar.MAY)) + 1) - (temp.getData().getMonth() + 1) < 6)
+		if(Calendar.getInstance().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) {
+			if(((Calendar.getInstance().get(Calendar.MONTH)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6)
 				temp.setIsExpired(false);
+			else temp.setIsExpired(true);
+		}
 		else temp.setIsExpired(true);
 		
 		if(evidenta.rovinietaExista(serieSasiu)) {

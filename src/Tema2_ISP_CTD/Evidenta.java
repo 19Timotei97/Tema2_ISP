@@ -4,6 +4,7 @@
 
 package Tema2_ISP_CTD;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /************************************************************/
@@ -57,9 +58,14 @@ public class Evidenta {
 		if(rovinieta != null)
 			rovinieta[i].setData(date);
 		
-		if(new Date().getYear() == rovinieta[i].getData().getYear()) {
-			if(new Date().getMonth() - rovinieta[i].getData().getMonth() < 6)
+		Date data = rovinieta[i].getData();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(data);
+		
+		if(Calendar.getInstance().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) {
+			if(((Calendar.getInstance().get(Calendar.MAY)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6)
 				rovinieta[i].setIsExpired(false);
+			else rovinieta[i].setIsExpired(true);
 		}
 		else rovinieta[i].setIsExpired(true);
 	}
