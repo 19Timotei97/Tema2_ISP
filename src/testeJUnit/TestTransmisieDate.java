@@ -1,9 +1,7 @@
 package testeJUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
 import Tema2_ISP_CTD.Camera;
 import Tema2_ISP_CTD.CanalComunicatie;
 import Tema2_ISP_CTD.DispVerificare;
