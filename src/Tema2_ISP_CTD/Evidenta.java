@@ -48,14 +48,27 @@ public class Evidenta {
 	/**
 	 * Getteri si setteri pentru fiecare atribut in parte
 	 */
+	
+	/**
+	 * Returneaza vectorul de roviniete
+	 */
 	public Rovinieta[] getRovinieta() {
 		return this.rovinieta;
 	}
 
+	/**
+	 * Intoarce rovinieta de pe pozitia data ca parametru
+	 * @param i - pozitia rovinietei care se doreste a fi returnata
+	 */
 	public Rovinieta getRovinieta(int i) {
 		return this.rovinieta[i];
 	}
 	
+	/**
+	 * Seteaza vectorul de roviniete cu un vector dat ca parametru
+	 * @param rovinieta
+	 * @param lungime
+	 */
 	public void setRovinieta(Rovinieta[] rovinieta, int lungime) {
 		this.rovinieta = new Rovinieta[lungime];
 		nrRovinieta =0;
@@ -66,11 +79,20 @@ public class Evidenta {
 		}
 	}
 	
+	/**
+	 * Seteaza rovinietea de pe pozitia data ca parametru cu rovinieta rov
+	 * @param rov - noua rovinieta ce va fi setata
+	 * @param poz - pozitia pe care se va pune noua rovinieta
+	 */
 	public void setRovinieta(Rovinieta rov, int poz) {
 		if(rovinieta != null)
 		this.rovinieta[poz] = rov;
 	}
 	
+	/**
+	 * Seteaza nr de roviniete si aloca spatiu daca este necesar
+	 * @param nr
+	 */
 	public void setNrRoviniete(int nr) {
 		if(nrRovinieta == 0) rovinieta = new Rovinieta[nr];
 		this.nrRovinieta = nr;
@@ -84,6 +106,7 @@ public class Evidenta {
 	 * Posibilitatea schimbarii datei unei Roviniete
 	 * @param date - data cu care se va schimba data originala
 	 * @param i - pozitia ocupata de Rovinieta in vectorul de roviniete
+	 * Se verifica si daca rovinieta este cu noua data expirata sau nu
 	 */
 	public void schimbaData(Date date, int i)
 	{
@@ -118,7 +141,8 @@ public class Evidenta {
 	 * Metoda folosita pentru a verifica existenta unei roviniete in evidenta
 	 * Se utilizeaza seria sasiului automobilului pentru care este inregistrata rovinieta
 	 * sau nr de inmatriculare iar in optiune se trece fie "sasiu" fie "inmatr", in functie de preferinta.
-	 * @param serieSasiu
+	 * @param str - seria sasiului sau nr de inmatriculare, depinzand de cazul de folosinta 
+	 * @param optiune - sasiu / inmatr, fiind optiunea dupa care se verifica existenta
 	 * @return
 	 */
 	public boolean rovinietaExista(String str, String optiune) 
@@ -154,6 +178,7 @@ public class Evidenta {
 	
 	/**
 	 * Metoda folosita pentru a verifica valabilitatea rovinietei in functie de seria sasiului
+	 * @param seriaSasiu - seria sasiului coresp. rovinietei
 	 */
 	public boolean rovinietaExpirata(String serieSasiu) {
 		
@@ -186,7 +211,15 @@ public class Evidenta {
 	
 	/**
 	 * Posibilitatea adaugarii de rovinieta in vectorul de roviniete
+	 * Exista 3 cazuri:
 	 * 
+	 * 1. In cazul in care exista mai mult de o rovinieta, se realoca spatiu pentru vectorul de roviniete si se salveaza intr-un vector temporar
+	 * vechile roviniete. Apoi se vor recopia in vectorul original valorile din vectorul temporar.
+	 * 
+	 * 2. Daca exista o singura rovinieta in vectorul de roviniete, se salveaza rovinieta existenta intr-o variabila temporara, se realoca spatiu cu unul mai mult
+	 * si apoi se pun in vectorul original rovinieta veche si cea noua.
+	 * 
+	 * 3. Daca nu exista nicio rovinieta, se aloca spatiu initial si se pune pe prima pozitie rovinieta dorita
 	 */
 	public void adaugaRovinieta(Rovinieta rovinieta) {
 		
@@ -223,7 +256,8 @@ public class Evidenta {
 	}
 	
 	/**
-	 * Metoda ce va fi folosita daca se doreste scoaterea din Evidenta a unei roviniete 
+	 * Metoda ce va fi folosita daca se doreste scoaterea din Evidenta a unei roviniete
+	 * @param rovinieta - rovinieta care se doreste a fi scoasa 
 	 */
 	public boolean scoateRovinieta(Rovinieta rovinieta) {
 		boolean ok=false;

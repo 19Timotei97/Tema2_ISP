@@ -15,16 +15,30 @@ import java.util.Date;
  */
 public class Rovinieta {
 	
+	/**
+	 * Id-ul pentru fiecare rovinieta in parte, folosita mai mult pentru identificarea rovinietelor
+	 * Folosit pentru a crea id-uri de roviniete
+	 */
 	private static long id = 159001l;
 
+	/**
+	 * Fiecare rovinieta are id-ul ei separat
+	 */
 	private long idRovinieta;
 	
+	/**
+	 * Variabila folosita pentru a determina valabilitatea unei roviniete
+	 */
 	private boolean isExpired;
 
 	private String nrInmatriculare;
 	
 	private String serieSasiu;
 	
+	/**
+	 * Fiecare rovinieta are o data, generata automat
+	 * Pentru exemplificarea aplicatiei cat si pentru simplitatea acesteia, am considerat ca o rovinieta este expirata dupa 6 luni de utilizare
+	 */
 	private Date data;
 	
 	/**
@@ -51,6 +65,12 @@ public class Rovinieta {
 		Rovinieta.id += 1;
 	}
 	
+	/**
+	 * Constructor prin care se poate seta si id-ul rovinietei
+	 * @param nrInmat
+	 * @param serieSasius
+	 * @param idRov
+	 */
 	public Rovinieta(String nrInmat, String serieSasius, long idRov)
 	{
 		this.setNrInmatriculare(nrInmat);
@@ -82,22 +102,28 @@ public class Rovinieta {
 	
 	/**
 	 * Modalitate de setare a datei Rovinietei
+	 * Totodata se verifica si valabilitatea rovinietei
 	 * @param data - data noua a Rovinietei
 	 */
 	public void setData(Date data)
 	{
-		this.data = data;
+		this.data = data; // se seteaza data rovinietei cu data primita ca parametru
 		
-		Date date = getData();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
+		/**
+		 * Acesta este un work-around, deoarece metoda getMonth() si getYear() au fost considerate invechite("deprecated")
+		 */
+		Date date = getData(); // Se creeaza o data noua cu data curenta
+		Calendar cal = Calendar.getInstance(); // Se creeaza o instanta a unui calendar
+		cal.setTime(date); // Se seteaza data calendarului cu data curenta a rovinietei
 		
+		// Daca rovinieta a fost creata in acelasi an cu cel curent
 		if(Calendar.getInstance().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) {
+			// si daca este mai noua de 6 luni
 			if(((Calendar.getInstance().get(Calendar.MONTH)) + 1) - (cal.get(Calendar.MONTH) + 1) < 6)
-				this.setIsExpired(false);
-			else this.setIsExpired(true);
+				this.setIsExpired(false); // nu este expirata
+			else this.setIsExpired(true); // daca este mai veche, o consideram expirata
 		}
-		else this.setIsExpired(true);
+		else this.setIsExpired(true); // daca nu este in acelasi an creata, o consideram expirata
 	}
 
 	public void setNrInmatriculare(String nrInmatriculare) {

@@ -89,7 +89,7 @@ public class Aplicatie {
 		propMas1 = new Proprietar_masina("Citi","01241124","Bd Cismigiu");
 		propMas1.introducereDate("B55CCC", "365sdf", evid);
 		propMas1.verificareRovinieta("B22CCC", "352sdf", evid);
-		//propMas1.getRovinieta().afisareDate();
+		propMas1.afisareDateRovinieta();
 		
 		System.out.println("Verificare clasa Imagine");
 		imag1 = new Imagine("B22CCC");

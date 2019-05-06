@@ -83,7 +83,7 @@ class TestVerificareRovinieta {
 		propMas4.afisareDateRovinieta();
 		
 		assertFalse(propMas4.verificareRovinieta(propMas4.getRovinieta().getNrInmatriculare(), "AB572HJ", evidenta));
-		
+		System.out.println("Nu este corecta seria sasiului la verificare!"); // pentru debug
 		
 		/**
 		 * Rovinieta este in regula, datele sunt corecte dar dupa ce este schimbata data,
@@ -223,12 +223,15 @@ class TestVerificareRovinieta {
 
 		evidenta.scoateRovinieta(rov3);
 		
-		propMas11.getRovinieta().setSerieSasiu("AA999OP");
+		rov3.setSerieSasiu("AA999OP");
+		
+		propMas11.setRovinieta(rov3);
 		
 		evidenta.adaugaRovinieta(rov3);		
 		
-		assertFalse(propMas11.verificareRovinieta(rov3.getNrInmatriculare(), "IK330JK", evidenta));
-		
+		Rovinieta rovTemp = evidenta.getUltimaRovinieta();
+		assertFalse(propMas11.verificareRovinieta(propMas11.getRovinieta().getNrInmatriculare(), "IK330JK", evidenta));
+		System.out.println("Seria sasiului nu este corecta la verificare!");
 		
 		/**
 		 * Proprietarul isi modifica numarul de inmatriculare, dar rovinieta veche nu are noul numar.
