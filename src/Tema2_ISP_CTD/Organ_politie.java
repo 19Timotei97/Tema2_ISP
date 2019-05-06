@@ -81,7 +81,7 @@ public class Organ_politie extends Date_Rovinieta {
     *  Prin aceasta metoda se asigneaza politistul catre infractor
     */
    public void trimiterePolitist() {
-       System.out.println("Politistul " + nume + "a fost trimis catre locatie.");
+       System.out.println("Politistul " + nume + " a fost trimis catre locatie.");
    }
 	
 	/**

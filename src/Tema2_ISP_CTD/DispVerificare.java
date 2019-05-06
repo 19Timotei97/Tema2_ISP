@@ -5,9 +5,7 @@
 package Tema2_ISP_CTD;
 
 import java.util.*; 
-import java.lang.*; 
 
-import javafx.scene.effect.Light.Distant;
 
 /************************************************************/
 /**
@@ -128,7 +126,10 @@ public class DispVerificare extends Date_Rovinieta {
 	}
 
 	public void setDistante(HashMap<String, Integer> dist) {
-		distante.putAll(dist);
+		if(dist != null) {
+			distante.clear();
+			distante.putAll(dist);
+		}
 	}
 	
 	public void setCanal(CanalComunicatie can) {
@@ -144,18 +145,26 @@ public class DispVerificare extends Date_Rovinieta {
 		if(date != null || date != "") return date;
 		return "";
 	}
+	
+	
 	/**
 	 * 
 	 */
-	public void verificareProximitatePolitie() {
-		HashMap<String, Integer> dist= new HashMap<String, Integer>();
-		dist.putAll(distante);
-		distante = sortByValue(dist);
-		Map.Entry<String,Integer> entry = distante.entrySet().iterator().next();
-		String key = entry.getKey();
-		Integer value = entry.getValue();
-		
-		alertarePolitie(key, value);
+	public boolean verificareProximitatePolitie() {
+		if(!distante.isEmpty()) {
+			HashMap<String, Integer> dist= new HashMap<String, Integer>();
+			dist.putAll(distante);
+			distante = sortByValue(dist);   // sorteaza hashmap-ul in functie de valoarea distantelor fata de dispozitiv
+			
+			Map.Entry<String,Integer> entry = distante.entrySet().iterator().next();
+			String key = entry.getKey();       // cheia pentru prima valoare din hashmap
+			Integer value = entry.getValue();  // prima valoarea din hashmap
+			
+			System.out.println("Departamentul este " + key);
+			alertarePolitie(key, value);
+			return true;
+		}
+		else return false;
 	}
 	
 	/**
@@ -195,6 +204,7 @@ public class DispVerificare extends Date_Rovinieta {
 				return true;
 			}
 			
+		System.out.println("Datele sunt in proces de verificare...");
 		verificareRovinieta(nrInmatriculare, serieSasiu);
 		return false;
 	}
@@ -206,6 +216,7 @@ public class DispVerificare extends Date_Rovinieta {
 		if(evidenta.rovinietaExista(serieSasiu, "sasiu")) {
 			if(evidenta.rovinietaExpirata(serieSasiu) == false) {
 				this.adaugaRovinieta(temp);
+				System.out.println("Date confirmate! Conduceti cu grija!");
 				verificareDate(1);
 				return 1;
 			} else {
@@ -228,8 +239,8 @@ public class DispVerificare extends Date_Rovinieta {
 	
 	public boolean alertarePolitie(String departament, int distanta) {
 		if(distanta > 0) {
-			System.out.println("Statia de politie " + departament + "a fost alertata!");
-			System.out.println("Aceasta se afla la distanta de " + distanta + "de locatia acestui dispozitiv.");
+			System.out.println("Statia de politie " + departament + " a fost alertata!");
+			System.out.println("Aceasta se afla la distanta de " + distanta + "km de locatia acestui dispozitiv.");
 			
 			Organ_politie politist = new Organ_politie();
 			politist.primireSemnal(departament);
@@ -328,6 +339,17 @@ public class DispVerificare extends Date_Rovinieta {
 			return true;
 		}
 		else return false;
+	}
+	
+	/**
+	 * 
+	 */
+	public void afiseazaDist() {
+		for (String name: distante.keySet()){
+        String key = name;
+        Integer value = distante.get(name);  
+        System.out.println(key + " " + value);  
+} 
 	}
 	
 	/**

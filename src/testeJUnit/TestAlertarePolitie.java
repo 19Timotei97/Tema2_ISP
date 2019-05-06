@@ -11,6 +11,7 @@ import Tema2_ISP_CTD.Evidenta;
 import Tema2_ISP_CTD.Imagine;
 import Tema2_ISP_CTD.Organ_politie;
 import Tema2_ISP_CTD.Rovinieta;
+import java.util.*;  
 
 class TestAlertarePolitie {
 
@@ -22,7 +23,7 @@ class TestAlertarePolitie {
 	/**
 	 * Testez modul de acceptare al datelor de catre dispozitivul de verificare, atunci cand primeste date de la o camera
 	 */
-	void testDateDisponibile1() {
+	void testAcceptareDate() {
 		
 		System.out.println("/**********************************************************");
 		System.out.println("Testul 1");
@@ -55,7 +56,7 @@ class TestAlertarePolitie {
 	 *  Metoda verifica daca numarul de inmatriculare exista, si daca acesta este asociat unei
 	 *  serii de sasiu
  	 */
-	void testDateDisponibile2() {
+	void testPreluareDateRovinieta() {
 		
 		System.out.println("/**********************************************************");
 		System.out.println("Testul 2");
@@ -89,7 +90,7 @@ class TestAlertarePolitie {
 	 * dispozitivul de verificare.
 	 * Aceasta testeaza daca rovinieta exista in evidenta inainte de a o adauga
 	 */
-	void testDateDisponibile3() {
+	void testActualizareLista() {
 		
 		System.out.println("/**********************************************************");
 		System.out.println("Testul 3");
@@ -126,7 +127,7 @@ class TestAlertarePolitie {
 	 *  Pentru valorile 2 si 3 aceasta intoarce false (rovinieta incorecta / expirata), iar pentru valoare 1, aceasta
 	 *  updateaza lista de roviniete din dispozitiv
 	 */
-	void testDateDisponibile4() {
+	void testVerificareDate() {
 		
 		System.out.println("/**********************************************************");
 		System.out.println("Testul 4");
@@ -156,13 +157,50 @@ class TestAlertarePolitie {
 	
 	@Test
 	/**
-	 *  Testez metoda alertarePolitie care verifica daca locatia respectiva este valabila si, daca da, trimite o alerta
-	 *  catre centrul respectiv
+	 * Testez metoda verificareProximitate, care verifica locatia celei mai apropiate sectii e politie pentru trimiterea unui echipaj de politie 
+	 * dupa proprietarul cu masina fara rovinieta
+	 * Testul esueaza daca campul HashMap din dispozitivul de verificare este gol. Altfel, alege cea mai apropiata statie. 
 	 */
-	void testConnectareDispVCanal1() {
+	void testVerificareProximitatePolitie() {
 		
 		System.out.println("/**********************************************************");
 		System.out.println("Testul 5");
+		System.out.println("**********************************************************/");
+
+		DispVerificare disp = new DispVerificare();
+		Rovinieta r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
+		Rovinieta r2 = new Rovinieta("B33CCC", "t353sdf", 15002l);
+		Rovinieta r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
+		Evidenta evid = new Evidenta();
+		
+		evid.adaugaRovinieta(r1);
+		evid.adaugaRovinieta(r2);	
+		evid.adaugaRovinieta(r3);
+		disp.setEvidenta(evid);
+		
+		Imagine imag2 = new Imagine("B22CCC");
+		Camera cam2 = new Camera("C2");
+		cam2.capturareImagine(imag2);
+		cam2.identificareNrMasina();
+		CanalComunicatie can = new CanalComunicatie(cam2);
+		disp.setCanal(can);
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("Damocles", 10);
+		disp.setDistante(map);
+		
+		assertTrue( disp.verificareProximitatePolitie() );
+	}
+	
+	@Test
+	/**
+	 *  Testez metoda alertarePolitie care verifica daca locatia respectiva este valabila si, daca da, trimite o alerta
+	 *  catre centrul respectiv
+	 */
+	void testAlertarePolitie() {
+		
+		System.out.println("/**********************************************************");
+		System.out.println("Testul 6");
 		System.out.println("**********************************************************/");
 
 		DispVerificare disp = new DispVerificare();
@@ -193,10 +231,10 @@ class TestAlertarePolitie {
 	 * Testez metoda primireSemnal care ilustreaza momentul primirii semnalului de alerta de la un dispozitiv de verificare
 	 * si, in cazul in care este ok, directioneaza un politist pentru sanctionare
 	 */
-	void testConnectareDispVCanal2() {
+	void testPrimireSemnalPolitie() {
 		
 		System.out.println("/**********************************************************");
-		System.out.println("Testul 6");
+		System.out.println("Testul 7");
 		System.out.println("**********************************************************/");
 
 		DispVerificare disp = new DispVerificare();
@@ -221,4 +259,5 @@ class TestAlertarePolitie {
 		assertTrue( op1.primireSemnal("Bahamas") );
 	}
 
+	
 }
