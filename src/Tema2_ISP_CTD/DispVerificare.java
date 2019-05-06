@@ -12,23 +12,31 @@ import java.util.*;
  **
  */
 public class DispVerificare extends Date_Rovinieta {
+	
 	/**
-	 * 
+	 * Practic, un index care retine cate roviniete au fost verificate pana acum.
 	 */
 	private int nrRoviniete;
 	/**
-	 * 
+	 * Camp care retine rovinietele verificate de dispozitiv pana acum.
+	 * Functioneaza ca un istoric al dispozitivului
 	 */
 	private Rovinieta[] rovinieta;
 	
+	/**
+	 * Camp care retine cele mai apropiate sectii de politie, impreuna cu distantele
+	 *  relative de la dispozitiv pana la acestea.
+	 */
 	private HashMap<String, Integer> distante = new HashMap<String, Integer>();
+	
+	/**
+	 * Camp print care dispozitivul de verificare comunica cu "baza de date"
+	 */
+	Evidenta evidenta;
 	
 	/**
 	 * Camp prin care disp de verificare comunica cu camera
 	 */
-	
-	Evidenta evidenta;
-	
 	CanalComunicatie canal = null;
 	
 	/**
@@ -36,6 +44,9 @@ public class DispVerificare extends Date_Rovinieta {
 	 */
 	String date;
 	
+	/**
+	 * Constructor de baza
+	 */
 	public DispVerificare() {
 		nrRoviniete =0;
 		rovinieta =null;
@@ -43,6 +54,9 @@ public class DispVerificare extends Date_Rovinieta {
 		distanteDefault();
 	}
 	
+	/**
+	 * Constructori in care putem introduce noi parametrii din cod
+	 */
 	public DispVerificare(CanalComunicatie can)
 	{
 		this.canal = can;
@@ -71,6 +85,9 @@ public class DispVerificare extends Date_Rovinieta {
 		this.canal = can;
 	}
 	
+	/**
+	 * Metoda care adauga niste valori predefinite (de test) pentru campul de distante
+	 */
 	public void distanteDefault() {
 		distante.put("Bucuresti", 30); 
 		distante.put("Ploiesti", 15); 
@@ -146,20 +163,29 @@ public class DispVerificare extends Date_Rovinieta {
 		return "";
 	}
 	
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
 	
 	/**
-	 * 
+	 * Metoda care verifica distantele fata de toate statiile de politie din vecinatate si o alege pe cea mai apropiata
+	 * Ea este impartita in 3 etape: sortarea locatiilor dupa distanta, alegerea locatiei cele mai apropiate si transmiterea
+	 *  acesteia catre metoda de alertarePolitie
 	 */
 	public boolean verificareProximitatePolitie() {
 		if(!distante.isEmpty()) {
+			// sortarea locatiilor dupa distanta fata de dispozitiv
 			HashMap<String, Integer> dist= new HashMap<String, Integer>();
 			dist.putAll(distante);
 			distante = sortByValue(dist);   // sorteaza hashmap-ul in functie de valoarea distantelor fata de dispozitiv
 			
+			// alegerea celei mai apropiate locatii
 			Map.Entry<String,Integer> entry = distante.entrySet().iterator().next();
 			String key = entry.getKey();       // cheia pentru prima valoare din hashmap
 			Integer value = entry.getValue();  // prima valoarea din hashmap
 			
+			// transmiterea informatiilor catre metoda de alertarePolitie
 			System.out.println("Departamentul este " + key);
 			alertarePolitie(key, value);
 			return true;
@@ -168,14 +194,14 @@ public class DispVerificare extends Date_Rovinieta {
 	}
 	
 	/**
-	 * 
+	 * Metoda care se ocupa de sortarea HashMap-ului de distante
 	 */
 	public HashMap<String, Integer> sortByValue(HashMap<String, Integer> dist) {
-		// Create a list from elements of HashMap 
+		// Creaza o lista din elementele HashMap-ului
         List<Map.Entry<String, Integer> > list = 
                new LinkedList<Map.Entry<String, Integer> >(dist.entrySet()); 
   
-        // Sort the list 
+        // Sorteaza lista
         Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() { 
             public int compare(Map.Entry<String, Integer> o1,  
                                Map.Entry<String, Integer> o2) 
@@ -184,17 +210,24 @@ public class DispVerificare extends Date_Rovinieta {
             } 
         }); 
         
+        // Retine lista intr-o variabila temporara
         HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>(); 
         for (Map.Entry<String, Integer> aa : list) { 
             temp.put(aa.getKey(), aa.getValue()); 
         } 
         
+        // transmite informatiile sortate
         return temp;
 	}
 	
 	
 	/**
+	 * Metoda care se ocupa identificarea seriei de sasiu asociate unui numar de inmatriculare 
+	 *  identificat de dispozitivul de identificare.
+	 * Aceasta verifica, de asemenea, daca numarul de inmatriculare exista si daca seria de sasiu 
+	 *  asociata este legitima, inainte de terminarea executiei
 	 * 
+	 * Daca una din aceste verificari esueaza, datele sunt transmise catre metoda de verificareRovinieta
 	 */
 	public boolean preluareDateRovinieta(String nrInmatriculare) {
 		String serieSasiu = "";
@@ -209,34 +242,49 @@ public class DispVerificare extends Date_Rovinieta {
 		return false;
 	}
 	
+	/**
+	 * Aceasta metoda verifica daca o rovinieta exista sau daca este expirata. Daca una din aceste conditii 
+	 *  nu este indeplinita, politia va fi alertata.
+	 * De asemenea, in timpul rularii, rezultatul intors de metoda este trimis catre decodificareSemnal pentru
+	 * 	interpretarea rezultatului intors de metoda
+	 */
 	@Override
 	public int verificareRovinieta(String nrInmatriculare, String serieSasiu) {
 		
 		Rovinieta temp = new Rovinieta(nrInmatriculare, serieSasiu);
 		if(evidenta.rovinietaExista(serieSasiu, "sasiu")) {
 			if(evidenta.rovinietaExpirata(serieSasiu) == false) {
-				this.adaugaRovinieta(temp);
 				System.out.println("Date confirmate! Conduceti cu grija!");
-				verificareDate(1);
+				this.adaugaRovinieta(temp);
+				decodificareSemnal(1);
 				return 1;
 			} else {
 				System.out.println("Rovinieta expirata! Inceperea procesului de alertare politie!");
 				verificareProximitatePolitie();
-				verificareDate(2);
+				decodificareSemnal(2);
 				return 2;}
 		} 
-		verificareProximitatePolitie();
 		System.out.println("Rovinieta incorecta! Inceperea procesului de alertare politie!");
-		verificareDate(3);
+		verificareProximitatePolitie();
+		decodificareSemnal(3);
 		return 3;
 	}
 	
-	public boolean verificareDate(int temp) {
+	/**
+	 * Identificarea mesajului transmis de metoda verificareRovinieta. Scop principal: debugging
+	 * @param temp = semnalul primit ca parametru
+	 */
+	public boolean decodificareSemnal(int temp) {
 		if(temp == 1) return true;
 		else if (temp == 2 || temp == 3) return false;
 		return false;
 	}
 	
+	/**
+	 * Metoda care trimite un semnal de alarma catre cea mai apropiata sectie de politie, in legatura 
+	 *  cu o rovinieta necorespunzatoare, identificata de una din camerele de politie
+	 * Detaliile celei mai apropiate sectii de politie sunt primite ca si parametru
+	 */
 	public boolean alertarePolitie(String departament, int distanta) {
 		if(distanta > 0) {
 			System.out.println("Statia de politie " + departament + " a fost alertata!");
@@ -268,14 +316,16 @@ public class DispVerificare extends Date_Rovinieta {
 		String captareDate = canal.transmitereDate();
 		if(this.canal != null && (captareDate != null || captareDate != "")) {
 			this.date = captareDate;
-			//System.out.print("Conectare reusita");
 			System.out.println(this.date);
+			this.preluareDateRovinieta(date);
 			return true;
 		}
-		//System.out.println("Eroare de conectare a Dispozitivului de Verificare la Canal");
 		return false;
 	}
 	
+	/**
+	 * Metode suplimentare pentru controlul campului de roviniete dintr-un obiect tip dispozitiv de verificare
+	 */
 	public boolean adaugaRovinieta(Rovinieta rovinieta) 
 	{
 		if(evidenta.rovinietaExista(rovinieta.getNrInmatriculare(), "inmatr"))
@@ -342,7 +392,7 @@ public class DispVerificare extends Date_Rovinieta {
 	}
 	
 	/**
-	 * 
+	 * Metoda care afiseaza continului campului de distante, de tip HashMap
 	 */
 	public void afiseazaDist() {
 		for (String name: distante.keySet()){
@@ -353,7 +403,7 @@ public class DispVerificare extends Date_Rovinieta {
 	}
 	
 	/**
-	 * 
+	 * Metoda care afiseaza continutul campului de roviniete verificate de dispozitiv pana in prezent.
 	 */
 	public void listaRoviniete() {
 		

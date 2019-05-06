@@ -20,18 +20,25 @@ public class Organ_politie extends Date_Rovinieta {
 	
 	private DispVerificare dispverif;
 	
+	/**
+	 * Constructor de baza
+	 */
 	public Organ_politie() {
 		nume = "Gica";
 		dispverif = new DispVerificare();
 	}
 	
+	/**
+	 * Constructor cu parametrii
+	 */
 	public Organ_politie(String nume, DispVerificare dispV)
 	{
 		this.nume = nume;
 		dispverif = dispV;
 	}
+	
 	/**
-	 * 
+	 *  Getteri si Setteri
 	 */
 	public void setNume(String nume)
 	{
@@ -50,10 +57,10 @@ public class Organ_politie extends Date_Rovinieta {
 	public void setDispVerif(DispVerificare dispverif) {
 		this.dispverif = dispverif;
 	}
+	
 	/**
 	 *  Fac override la fct verificareRovinieta din cls Date_Rovinieta 
 	 */
-	
 	@Override 
 	public int verificareRovinieta(String nrInmat, String serieSasiu) {
 		int rezultat = dispverif.verificareRovinieta(nrInmat, serieSasiu);

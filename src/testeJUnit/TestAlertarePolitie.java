@@ -122,12 +122,12 @@ class TestAlertarePolitie {
 	
 	@Test
 	/**
-	 *  Testez metoda de verificareDate. Aceasta ilustreaza rezultatul luat de metoda verificareRovinieta 
+	 *  Testez metoda de decodificareSemnal. Aceasta ilustreaza rezultatul luat de metoda verificareRovinieta 
 	 *  care se ocupa de partea de decizie pentru validarea datelor.
 	 *  Pentru valorile 2 si 3 aceasta intoarce false (rovinieta incorecta / expirata), iar pentru valoare 1, aceasta
 	 *  updateaza lista de roviniete din dispozitiv
 	 */
-	void testVerificareDate() {
+	void testDecodificareSemnal() {
 		
 		System.out.println("/**********************************************************");
 		System.out.println("Testul 4");
@@ -151,7 +151,7 @@ class TestAlertarePolitie {
 		CanalComunicatie can = new CanalComunicatie(cam2);
 		disp.setCanal(can);
 		
-		assertTrue( disp.verificareDate(disp.verificareRovinieta("B22CCC", "352sdf")) );
+		assertTrue( disp.decodificareSemnal(disp.verificareRovinieta("B22CCC", "352sdf")) );
 		
 	}
 	

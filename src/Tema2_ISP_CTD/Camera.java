@@ -70,7 +70,7 @@ public class Camera {
 				&& nrMasina.equals(nrMasina.toUpperCase())  ) {
 			this.nrInmatriculare = nrMasina;
 			StareCam = StariCamera.NrIdentificat;
-			System.out.println("Cofirmare existenta date!");
+			System.out.println("Confirmare existenta date!");
 			return true;
 		}
 		System.out.println("Nu sunt date disponibile!");

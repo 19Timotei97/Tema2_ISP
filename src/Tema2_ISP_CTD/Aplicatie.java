@@ -13,28 +13,7 @@ public class Aplicatie {
 
 	public static void main(String[] args) {
 
-		
-		DispVerificare disp = new DispVerificare();
-		Rovinieta r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
-		Rovinieta r2 = new Rovinieta("B33CCC", "353sdf", 15002l);
-		Rovinieta r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
-		Evidenta evid = new Evidenta();
-		
-		evid.adaugaRovinieta(r1);
-		evid.adaugaRovinieta(r2);	
-		evid.adaugaRovinieta(r3);
-		disp.setEvidenta(evid);
-		
-		Imagine imag2 = new Imagine("B22CCC");
-		Camera cam2 = new Camera("C2");
-		cam2.capturareImagine(imag2);
-		cam2.identificareNrMasina();
-		CanalComunicatie can = new CanalComunicatie(cam2);
-		disp.setCanal(can);
-		disp.acceptareDate();
-			
-		
-		/*Organ_politie oPolitie1;
+		Organ_politie oPolitie1;
 		Proprietar_masina propMas1;
 		Camera cam1;
 		DispVerificare disp;
@@ -42,6 +21,27 @@ public class Aplicatie {
 		Sanctiune s1;
 		Imagine imag1;
 		Evidenta evid;
+		
+		disp = new DispVerificare();
+		r1 = new Rovinieta("B22CCC", "352sdf", 15001l);
+		r2 = new Rovinieta("B33CCC", "353sdf", 15002l);
+		r3 = new Rovinieta("B44CCC", "354sdf", 15003l);
+		evid = new Evidenta();
+		
+		evid.adaugaRovinieta(r1);
+		evid.adaugaRovinieta(r2);	
+		evid.adaugaRovinieta(r3);
+		disp.setEvidenta(evid);
+		
+		Imagine imag2 = new Imagine("B25CCC");
+		Camera cam2 = new Camera("C2");
+		cam2.capturareImagine(imag2);
+		cam2.identificareNrMasina();
+		CanalComunicatie can = new CanalComunicatie(cam2);
+		disp.setCanal(can);
+		disp.acceptareDate();
+			
+		System.out.println("*************************************************\n\n");
 		
 		disp = new DispVerificare();
 		oPolitie1 = new Organ_politie("Gigel", disp);
@@ -92,7 +92,7 @@ public class Aplicatie {
 		//propMas1.getRovinieta().afisareDate();
 		
 		System.out.println("Verificare clasa Imagine");
-		imag1 = new Imagine("Imag1");
+		imag1 = new Imagine("B22CCC");
 		System.out.println(imag1.getNrMasina());
 		System.out.println("\n\n\n");
 		
@@ -105,7 +105,7 @@ public class Aplicatie {
 		
 		oPolitie1.verificareRovinieta("nasdfkjn", "afadsfsdf");
 		s1 = new Sanctiune("ceva","" , "Bd Dimitrie Cantemir, Nr. 5");
-		System.out.println(s1.getLoc());*/
+		System.out.println(s1.getLoc());
 	}
 
 }
