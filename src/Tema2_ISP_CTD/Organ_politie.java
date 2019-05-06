@@ -76,7 +76,7 @@ public class Organ_politie extends Date_Rovinieta {
      * Prin aceasta metoda se primeste semnalul de la un dispozitiv de verificare
      */
 	public boolean primireSemnal(String departament) {
-		if(departament != null || departament != "") {
+		if(departament != null && departament != "") {
 			System.out.println("Semnal primit de sectia " + departament);
 			trimiterePolitist();
 			return true;

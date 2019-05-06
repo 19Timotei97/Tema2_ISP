@@ -151,7 +151,7 @@ class TestAlertarePolitie {
 		CanalComunicatie can = new CanalComunicatie(cam2);
 		disp.setCanal(can);
 		
-		assertTrue( disp.decodificareSemnal(disp.verificareRovinieta("B22CCC", "352sdf")) );
+		assertFalse( disp.decodificareSemnal(disp.verificareRovinieta("CT24ASD", "356sdf")) );
 		
 	}
 	
@@ -256,7 +256,7 @@ class TestAlertarePolitie {
 		disp.setCanal(can);
 		Organ_politie op1 = new Organ_politie();
 		
-		assertTrue( op1.primireSemnal("Bahamas") );
+		assertFalse( op1.primireSemnal("") );
 	}
 
 	
