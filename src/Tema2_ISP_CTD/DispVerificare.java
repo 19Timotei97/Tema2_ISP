@@ -60,6 +60,9 @@ public class DispVerificare extends Date_Rovinieta {
 	public DispVerificare(CanalComunicatie can)
 	{
 		this.canal = can;
+		nrRoviniete =0;
+		rovinieta =null;
+		evidenta =new Evidenta();
 		distanteDefault();
 	}
 	

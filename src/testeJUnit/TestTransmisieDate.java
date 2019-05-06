@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import Tema2_ISP_CTD.Camera;
 import Tema2_ISP_CTD.CanalComunicatie;
 import Tema2_ISP_CTD.DispVerificare;
+import Tema2_ISP_CTD.Evidenta;
 import Tema2_ISP_CTD.Imagine;
 
 class TestTransmisieDate {
@@ -55,11 +56,14 @@ class TestTransmisieDate {
 		
 		Imagine imag2 = new Imagine("VN22MOL");
 		Camera cam2 = new Camera("C2");
+		
 		cam2.capturareImagine(imag2);
 		assertTrue(cam2.identificareNrMasina());
 		CanalComunicatie canCom = new CanalComunicatie(cam2);
 		DispVerificare disp;
+		
 		disp = new DispVerificare(canCom);
+
 		disp.acceptareDate();
 	}
 	
